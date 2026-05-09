@@ -1,26 +1,33 @@
 import * as React from 'react';
-
+import 'react-native-gesture-handler';
 import "./global.css"
 
 
 import Navigation from "./navigation/root";
 
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 import {DatabaseProvider} from "@nozbe/watermelondb/react";
 import {localDatabase} from "./local_database";
-
-const queryClient = new QueryClient()
-
+import {Toaster} from 'sonner-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {KeyboardProvider} from "react-native-keyboard-controller";
 
 export default function App() {
 
 
     return (
-     <DatabaseProvider database={localDatabase}>
-         <QueryClientProvider client={queryClient}>
-             <Navigation/>
+        <SafeAreaProvider>
+            <GestureHandlerRootView>
+                <DatabaseProvider database={localDatabase}>
+                    <KeyboardProvider>
+                        <Navigation/>
+                    </KeyboardProvider>
+                    <Toaster theme={"system"} autoWiggleOnUpdate={"toast-change"} swipeToDismissDirection={"left"}
+                             richColors={true} duration={1500} style={{elevation: 0.7}}/>
+                </DatabaseProvider>
+            </GestureHandlerRootView>
+        </SafeAreaProvider>
 
-         </QueryClientProvider>
-     </DatabaseProvider>
     )
 }

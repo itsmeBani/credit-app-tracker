@@ -1,11 +1,14 @@
-import { create } from "zustand";
+import {create} from "zustand";
 import {localDatabase} from "../../../local_database";
-import ModelProductCategory from "../../../local_database/model/model.productCategory";
+import {CategoryInsertPayload} from "../types";
+import {ProductCategoryService} from "../services/category.service";
+import {ProductCategoryRepository} from "../data/category.repository";
+import {ImageUploadService} from "../../uploads/services/ImageUploadService";
 
 interface CategoryActions {
     setActiveCategory: (category: string) => void;
     clearActiveCategory: () => void;
-    createCategory: () => void;
+    createCategory: (category:CategoryInsertPayload) => void;
     deleteAllCategories:()=>void
 }
 
@@ -14,9 +17,19 @@ type CategoryState = {
     actions:CategoryActions
 };
 
+
+const categoryRepository = new ProductCategoryRepository();
+const imageService = new ImageUploadService();
+
+export const productCategoryService = new ProductCategoryService(
+    categoryRepository,
+    imageService
+);
+
  const useCategoryStore = create<CategoryState>((set, get) => ({
     activeCategory: "",
-    actions:{
+
+     actions:{
         setActiveCategory: (category) =>
             set((state) => ({
                 activeCategory:
@@ -24,25 +37,8 @@ type CategoryState = {
             })),
 
         clearActiveCategory: () => set({ activeCategory: "" }),
-        createCategory : async()=>{
-
-                const now = Date.now()
-
-                await localDatabase.write(async () => {
-                    await localDatabase
-                        .get<ModelProductCategory>('product_categories')
-                        .create(category => {
-                            category.name = 'test'
-                            category.description = 'uho'
-                            category.imageUrl =
-                                'https://res.cloudinary.com/ddrn6ok5m/image/upload/e_background_removal/f_png/v1775800201/91195ba2-184e-4964-a1f7-6e5e22ef50ce_njbdgj.png'
-                            category.backgroundColor = '#bfdbfe'
-                            category.createdAt = now
-                            category.updatedAt = now
-                            category.deletedAt = null
-                        })
-                })
-
+        createCategory : async(category:CategoryInsertPayload)=>{
+           await productCategoryService.createProductCategory(category)
         },
         deleteAllCategories: async()=>{
 

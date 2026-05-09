@@ -39,6 +39,23 @@
     },
     "plugins": [
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos",
+
+          "colors": {
+            "cropToolbarColor": "#ffffff"
+          }
+        }
+      ],
+      [
+        "expo-file-system",
+        {
+          "supportsOpeningDocumentsInPlace": true,
+          "enableFileSharing": true
+        }
+      ],
+      [
         "expo-font",
         {
           "fonts": [
@@ -50,6 +67,7 @@
             "./assets/fonts/PlusJakartaSans-Regular.ttf",
             "./assets/fonts/Barlow-ExtraBoldItalic.ttf"
           ],
+
           "android": {
             "fonts": [
               {
@@ -97,6 +115,7 @@
         }
 
 
+
       ]
 
     ],
@@ -104,9 +123,6 @@
       "eas": {
         "projectId": "91e40438-068a-46b5-9525-d16754ec4217"
       }
-    },
-    "experiments": {
-      "reactCompiler": true
     }
   }
 }

@@ -12,7 +12,7 @@ export function SafeAreaContainer({
                                   }: SafeAreaContainerProps) {
     return (
         <SafeAreaView edges={["top", "left", "right",]}
-            className={`flex-1 ${className} `}
+            className={`flex-1 px-4 ${className} `}
         >
             {children}
         </SafeAreaView>

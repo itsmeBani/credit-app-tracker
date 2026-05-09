@@ -3,7 +3,7 @@ import { field, text, children } from '@nozbe/watermelondb/decorators'
 import ModelProducts from './model.products'
 
 export default class ModelProductCategory extends Model {
-    static table = 'product_categories'
+    static table = 'product_categories' as const
 
     @text('name') name!: string
     @text('description') description!: string | null
@@ -15,5 +15,5 @@ export default class ModelProductCategory extends Model {
 
     @field('created_at') createdAt!: number
     @field('updated_at') updatedAt!: number
-    @field('deleted_at') deletedAt!: string | null
+    @field('deleted_at') deletedAt!: number | null
 }

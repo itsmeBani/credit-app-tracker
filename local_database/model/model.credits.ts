@@ -1,28 +1,26 @@
-import { Model, Relation } from '@nozbe/watermelondb'
-import { field, text, relation } from '@nozbe/watermelondb/decorators'
-import ModelUsers from './model.users'
-import ModelProducts from './model.products'
+import {Model, Query, Relation} from '@nozbe/watermelondb'
+import { field, text, relation, children } from '@nozbe/watermelondb/decorators'
+import ModelCustomers from "./modelCustomers";
+import ModelCreditItem from "./model.creditItems";
+import {CreditStatus} from "../types";
+
 
 export default class ModelCredit extends Model {
     static table = 'credits'
 
-    @field('customer_id') customerId!: number
-    @field('product_id') productId!: number
+    // owner
+    @field('customer_id') customerId!: string
 
-    // credit → user
-    @relation('users', 'customer_id')
-    customer!: Relation<ModelUsers>
+    @relation('customers', 'customer_id')
+    customer!: Relation<ModelCustomers>
 
-    // credit → product
-    @relation('products', 'product_id')
-    product!: Relation<ModelProducts>
+    // relations
+    @children('credit_items') items!: Query<ModelCreditItem>
 
-    @field('quantity') quantity!: number
-
-    @text('status') status!: string
-    @text('price_at_purchase') priceAtPurchase!: string
-
-    @field('paid_at') paidAt!: number | null
+    // summary
+    @field('total_amount') totalAmount!: number
+    @text('status') status!:CreditStatus
+    @field('paid_amount') paidAmount!: number
 
     @field('created_at') createdAt!: number
     @field('updated_at') updatedAt!: number

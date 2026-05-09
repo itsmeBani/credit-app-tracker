@@ -5,18 +5,6 @@ import Feather from '@expo/vector-icons/Feather';
 import AntDesign from "@expo/vector-icons/AntDesign";
 import React from "react";
 
-
-export const formatDate = (timestamp: number) => {
-    const date = new Date(timestamp);
-
-    return date.toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-};
 export const getStatusIcon = (status: SyncStatus) => {
     const size=17
     switch (status) {
@@ -40,14 +28,15 @@ export const getStatusIcon = (status: SyncStatus) => {
                 icon: <MaterialCommunityIcons name="alert-circle-outline" size={size} color={"#DC2626"} />,
                 color: "#DC2626",
                 title: "Sync Failed",
-                subtitle: "We couldn't sync your changes. Please try again."
+                subtitle: "Sync failed. Check connection"
             };
         default:
             return {
-                icon:   <MaterialCommunityIcons name="signal-off"  size={size} color={"#9CA3AF"} /> ,
+                icon: <MaterialCommunityIcons name="signal-off" size={size} color={"#9CA3AF"}/>,
                 color: "#9CA3AF",
                 title: "Idle",
                 subtitle: "No internet connection",
-            };
+            }
+
     }
-};
+}

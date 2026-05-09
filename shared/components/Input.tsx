@@ -7,67 +7,76 @@ import {
     TextInputProps,
 } from "react-native";
 
-type BaseProps<T> = {
+type BaseProps = {
     label?: string;
-    value: T;
-    onChangeText: (value: T) => void;
+    value: string;
+    onChangeText: (value: string) => void;
     onClear?: () => void;
     placeholder?: string;
-    isNumeric?: boolean;
+    error?: string; // 👈 add this
 } & Omit<TextInputProps, "value" | "onChangeText">;
 
-export default function Input<T extends string | number>({
-                                                             label = "label",
-                                                             value,
-                                                             onChangeText,
-                                                             onClear,
-                                                             placeholder = "Enter text...",
-                                                             isNumeric = false,
-                                                             ...props
-                                                         }: BaseProps<T>) {
+export default function Input({
+                                  label = "label",
+                                  value,
+                                  onChangeText,
+                                  onClear,
+                                  placeholder = "Enter text...",
+                                  error,
+                                  ...props
+                              }: BaseProps) {
     const [isFocused, setIsFocused] = useState(false);
 
-    const handleChange = (text: string) => {
-        if (isNumeric) {
-            const numericValue = text.replace(/[^0-9.]/g, "");
-            onChangeText(Number(numericValue) as T);
-        } else {
-            onChangeText(text as T);
-        }
-    };
+    const hasError = !!error;
 
     return (
-        <View className=" ">
-            <Text style={{fontFamily:"PlusJakartaSans"}} className="pb-2 text-gray-600 text-sm  dark:text-white">
+        <View className="">
+            <Text
+                style={{ fontFamily: "PlusJakartaSans" }}
+                className="pb-2 text-gray-600 text-sm dark:text-white"
+            >
                 {label}
             </Text>
 
             <View
-                className={`flex-row items-center rounded-lg     px-4 py-0.5 ${
-                    isFocused
-                        ? "border border-blue-300"
-                        : "border border-gray-300 dark:border-gray-100/50"
-                }`}
+                className="flex-row items-center rounded-lg px-3 py-0.5"
+                style={{
+                    borderWidth: 1,
+                    borderColor: hasError
+                        ? "#fd4949" // red-400
+                        : isFocused
+                            ? "#93C5FD" // blue-300
+                            : "#D1D5DB", // gray-300
+                }}
             >
                 <RNTextInput
-                    value={String(value)}
-                    onChangeText={handleChange}
+                    value={value}
+                    onChangeText={onChangeText}
                     placeholder={placeholder}
-                    placeholderTextColor="#9CA3AF"
-                    style={{fontFamily:"PlusJakartaSans"}}
-                    keyboardType={isNumeric ? "numeric" : "default"}
-                    className="flex-1 text-gray-600 font-medium dark:text-white"
+                    placeholderTextColor="#B0B7C3"
+                    style={{
+                        fontFamily: "PlusJakartaSans",
+                        fontWeight: "500",
+                    }}
+                    className="flex-1 text-gray-600 dark:text-white"
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     {...props}
                 />
 
-                {String(value).length > 0 && onClear && (
+                {value.length > 0 && onClear && (
                     <TouchableOpacity onPress={onClear}>
                         <Text className="text-gray-400">✕</Text>
                     </TouchableOpacity>
                 )}
             </View>
+
+
+            {hasError && (
+                <Text style={{color:"#fd4949"}} className=" font-jakarta text-xs mt-1">
+                    {error}
+                </Text>
+            )}
         </View>
     );
 }

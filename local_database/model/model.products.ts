@@ -4,15 +4,15 @@ import ModelProductCategory from './model.productCategory'
 import ModelCredit from './model.credits'
 
 export default class ModelProducts extends Model {
-    static table = 'products'
+    static table = 'products' as const
 
     @text('name') name!: string
     @text('description') description!: string | null
     @text('price') price!: string
-    @text('image_urls') imageUrls!: string
-    @text('status') status!: string
+    @text('image_url') imageUrl!: string
+    @text('status') status!:  "AVAILABLE" | "UNAVAILABLE"
 
-    @field('category_id') categoryId!: number
+    @field('category_id') categoryId!: string
 
     // product → category
     @relation('product_categories', 'category_id')

@@ -19,7 +19,7 @@ export default function Search({
     const [isFocused, setIsFocused] = useState(false);
     const scheme = useColorScheme();
     return (
-        <View className="px-5  py-2">
+        <View className="py-2 pt-4">
             <View
                 className={`flex-row items-center rounded-full px-4 
       ${isFocused ? " border border-blue-300" : " border border-gray-200 dark:border-gray-100/50"}

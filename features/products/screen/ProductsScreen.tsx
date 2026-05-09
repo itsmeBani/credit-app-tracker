@@ -1,23 +1,24 @@
-import React, {Suspense, useRef, useState} from 'react';
+import React, {Suspense} from 'react';
 
 
-import ProductCategory from "../ProductCategory";
+import ProductCategory from "../components/ProductCategory";
 
 import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
-import Search from "../../../shared/components/Search";
+
 
 import Title from "../../../shared/components/Title";
 
 import {ActivityIndicator, View} from "react-native";
 
-import Products from "../Products";
+import Products from "../components/Products";
 
-import SyncButton from "../../sync/components/SyncButton";
+
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 
-import SyncDetails from "../../sync/SyncDetails";
+
 import {useProductActions, useProductSearch} from "../store/store.products";
-import {values} from "@nozbe/watermelondb/utils/fp";
+import CreateButton from "../components/CreateButton";
+import Search from "../../../shared/components/Search";
 
 
 function ProductsContent() {
@@ -30,23 +31,18 @@ function ProductsContent() {
     return (
         <GestureHandlerRootView className={"flex-1"}>
             <SafeAreaContainer>
-                <View className="w-full  items-end px-4">
-                    <SyncButton></SyncButton>
-                </View>
-                <Title title={"Manage Product"} align={"center"}/>
+                <Title   description={"Create, edit, and organize your products easily."} title={"Manage Product"} align={"center"}/>
+
 
                 <Search
                     value={search}
                     onChangeText={setSearch}
                     placeholder="Search products..."
                 />
+                <CreateButton/>
                 <ProductCategory/>
                 <Products search={search} />
-
             </SafeAreaContainer>
-
-            <SyncDetails/>
-
         </GestureHandlerRootView>
 
     );

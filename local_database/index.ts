@@ -7,8 +7,11 @@ import migrations from './migrations/migrations'
 import ModelProductCategory from "./model/model.productCategory";
 import ModelCredit from "./model/model.credits";
 import ModelProducts from "./model/model.products";
-import ModelUsers from "./model/model.users";
+import ModelCustomers from "./model/modelCustomers";
 import { setGenerator } from "@nozbe/watermelondb/utils/common/randomId"
+import ModelImageUploadQueue from "./model/model.imageUploadQueue";
+import ModelPayment from "./model/model.payments";
+import ModelCreditItem from "./model/model.creditItems";
 
 // import Post from './model/Post' // ⬅️ You'll import your Models here
 
@@ -37,7 +40,10 @@ export const localDatabase = new Database({
         ModelProductCategory,
         ModelCredit,
         ModelProducts,
-        ModelUsers
+        ModelCustomers,
+        ModelPayment,
+        ModelCreditItem,
+        ModelImageUploadQueue
     ],
 
 })

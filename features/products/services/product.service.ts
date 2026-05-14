@@ -29,6 +29,8 @@ export class ProductService {
 
                 const product = await this.productRepository.create(newProduct);
 
+
+
                 await this.imageService.addToQueue({
                     referenceTable: "products",
                     referenceId: product.id,

@@ -29,7 +29,6 @@ function IconButton({
 
     const { colors } = useTheme();
 
-    // ✅ strongly typed variant map using "satisfies"
     const variants = {
         primary: {
             container: {
@@ -75,7 +74,18 @@ function IconButton({
             disabled={disabled}
             style={{
                 ...current.container,
-                elevation: variant === "primary" ? 2 : 0,
+
+                shadowColor: colors.primary,
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: variant === "primary" ? 0.35 : 0,
+                shadowRadius: 5,
+
+                // Android shadow
+                elevation: variant === "primary" ? 6 : 0,
+
                 opacity: disabled ? 0.6 : 1,
             }}
             className={`py-2 px-4 rounded-full flex-row items-center justify-center gap-2 ${containerClassName}`}

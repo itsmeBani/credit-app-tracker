@@ -10,27 +10,20 @@ type Props = {
 function Title({ title = "", align = "center" ,description=""}: Props) {
 
 
-    const textAlignClass =
-        align === "center"
-            ? "text-center"
-            : align === "right"
-                ? "text-right"
-                : "text-left";
-
     return (
-        <View className={` py-1 flex w-full `} >
+        <View className={` py-1  `} >
             <Text
                 style={{ fontFamily: "PlusJakartaSans" }}
-                className={`text-xl font-bold dark:text-white text-slate-700 ${textAlignClass}`}
+                className={`text-xl text-center font-bold dark:text-white text-slate-700 `}
             >
-                {title}
+                {title ?? ""}
             </Text>
             {
                 description &&   <Text
                     style={{ fontFamily: "PlusJakartaSans" }}
-                    className={`text-xs font-semibold  dark:text-white text-slate-500 ${textAlignClass}`}
+                    className={`text-xs font-semibold text-center dark:text-white text-slate-500 `}
                 >
-                    {description}
+                    {description ?? "" }
                 </Text>
             }
         </View>

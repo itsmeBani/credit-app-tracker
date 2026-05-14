@@ -9,7 +9,7 @@ import Login from "../features/authentication/screens/Login";
 import {createStaticNavigation, StaticParamList} from "@react-navigation/native";
 import * as React from "react";
 import ManageProductScreen from "../features/products/screen/child-screen/ManageProductScreen";
-import {useColorScheme} from "react-native";
+import {Button, Text, useColorScheme, View} from "react-native";
 
 
 import {StatusBar} from "expo-status-bar";
@@ -21,8 +21,11 @@ import CreateCategoryScreen from "../features/products/screen/child-screen/Creat
 import {ImageUploadService} from "../features/uploads/services/ImageUploadService";
 import {DarkCustomTheme, LightTheme} from "../shared/utils/constant";
 import CustomerCreditScreen from "../features/customers/screens/child-screens/CustomerCreditScreen";
-import CreateCustomerScreen from "../features/customers/screens/child-screens/CreateCustomer";
+import CreateCustomerScreen from "../features/customers/screens/child-screens/CreateCustomerScreen";
 import CustomerItemsCreditScreen from "../features/customers/screens/child-screens/CustomerItemsCreditScreen";
+import {SafeAreaView} from "react-native-safe-area-context";
+import HeaderNavigation from "../shared/components/HeaderNavigation";
+import Title from "../shared/components/Title";
 
 const Tabs = createBottomTabNavigator({
 
@@ -70,8 +73,10 @@ const Tabs = createBottomTabNavigator({
             screen: CustomerScreen,
             options: {
                 headerShown: false
+
             }
         },
+
         Dashboard: {
             if: () => true,
             screen: HomeScreen,
@@ -98,6 +103,7 @@ const MainStack = createNativeStackNavigator({
         CustomerCredit: {
             screen: CustomerCreditScreen,
 
+
         },
         CreateCustomer: {
             screen: CreateCustomerScreen,
@@ -111,7 +117,8 @@ const MainStack = createNativeStackNavigator({
             screen: CreateCategoryScreen
         },
         ManageCustomerItemsCredit: {
-            screen: CustomerItemsCreditScreen
+            screen: CustomerItemsCreditScreen,
+            // title={"Manage Items"} description={"View, Manage, and track all credit items"}
         }
     },
 })
@@ -159,7 +166,7 @@ export default function Navigation() {
     useSyncOnDatabaseChange({
         database: database,
         tables: ["products", "customers", "credits", "product_categories"],
-        delay: 5000,
+        delay: 20000,
         onSyncTrigger: async () => {
 
             await sync()

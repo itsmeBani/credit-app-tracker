@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import {View} from "react-native";
 
 import {Controller, useForm} from "react-hook-form";
@@ -8,22 +8,28 @@ import ColorPicker from "../../../../shared/components/ColorPicker";
 import Button from "../../../../shared/components/Button";
 import {useNavigation} from "@react-navigation/native";
 import ImagePicker from "../../../../shared/components/ImagePicker";
-import {useImageManager} from "../../../../shared/hooks/useImagePicker";
 import {SafeAreaView} from "react-native-safe-area-context";
 import KeyboardAwareContainer from "../../../../shared/components/KeyboardAwareContainer";
-import {useCategoryActions} from "../../store/store.category";
 import {ManageCategoryFormValues} from "../../types";
 import {manageCategorySchema} from "../../schema_validation/category";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {ImageUploadService} from "../../../uploads/services/ImageUploadService";
+import {ProductCategoryRepository} from "../../data/category.repository";
+import {ProductCategoryService} from "../../services/category.service";
 
 
 function CreateCategoryScreen() {
     const navigation = useNavigation();
 
+    const categoryRepository = new ProductCategoryRepository();
+    const imageService = new ImageUploadService();
 
+     const productCategoryService = new ProductCategoryService(
+        categoryRepository,
+        imageService
+    );
     const scrollRef = useRef<any>(null);
 
-    const  {createCategory}=useCategoryActions()
 
     const {
         control,
@@ -43,7 +49,7 @@ function CreateCategoryScreen() {
     const previewColor = watch("backgroundColor");
 
     const onSubmit = async (data:ManageCategoryFormValues) => {
-        createCategory(data)
+       await productCategoryService.createProductCategory(data)
         reset()
     }
 
@@ -52,7 +58,7 @@ function CreateCategoryScreen() {
 
         <SafeAreaView className="flex-1">
             <HeaderNavigation
-                onPress={() => navigation.goBack()}
+
                 description={"Add new category to organize your product"}
                 title={"Create New Category"}
             />

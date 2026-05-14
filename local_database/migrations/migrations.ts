@@ -5,8 +5,6 @@ export default schemaMigrations({
         {
             toVersion: 2,
             steps: [
-
-                // product_categories
                 createTable({
                     name: 'product_categories',
                     columns: [
@@ -20,7 +18,6 @@ export default schemaMigrations({
                     ],
                 }),
 
-                // products
                 createTable({
                     name: 'products',
                     columns: [
@@ -29,14 +26,13 @@ export default schemaMigrations({
                         { name: 'price', type: 'string' },
                         { name: 'image_url', type: 'string' },
                         { name: 'status', type: 'string' },
-                        { name: 'category_id', type: 'string' },
+                        { name: 'category_id', type: 'string', isIndexed: true },
                         { name: 'created_at', type: 'number' },
                         { name: 'updated_at', type: 'number' },
                         { name: 'deleted_at', type: 'number', isOptional: true },
                     ],
                 }),
 
-                // customers
                 createTable({
                     name: 'customers',
                     columns: [
@@ -48,11 +44,10 @@ export default schemaMigrations({
                     ],
                 }),
 
-                // credits (summary only)
                 createTable({
                     name: 'credits',
                     columns: [
-                        { name: 'customer_id', type: 'string' },
+                        { name: 'customer_id', type: 'string', isIndexed: true },
                         { name: 'status', type: 'string' },
                         { name: 'total_amount', type: 'number' },
                         { name: 'paid_amount', type: 'number' },
@@ -62,12 +57,11 @@ export default schemaMigrations({
                     ],
                 }),
 
-                // credit_items
                 createTable({
                     name: 'credit_items',
                     columns: [
-                        { name: 'credit_id', type: 'string' },
-                        { name: 'product_id', type: 'string' },
+                        { name: 'credit_id', type: 'string', isIndexed: true },
+                        { name: 'product_id', type: 'string', isIndexed: true },
                         { name: 'quantity', type: 'number' },
                         { name: 'price_at_purchase', type: 'number' },
                         { name: 'subtotal', type: 'number' },
@@ -77,11 +71,10 @@ export default schemaMigrations({
                     ],
                 }),
 
-                // payments
                 createTable({
                     name: 'payments',
                     columns: [
-                        { name: 'credit_id', type: 'string' },
+                        { name: 'credit_id', type: 'string', isIndexed: true },
                         { name: 'amount', type: 'number' },
                         { name: 'note', type: 'string', isOptional: true },
                         { name: 'created_at', type: 'number' },
@@ -90,12 +83,11 @@ export default schemaMigrations({
                     ],
                 }),
 
-                // image upload queue
                 createTable({
                     name: 'image_upload_queue',
                     columns: [
                         { name: 'reference_table', type: 'string' },
-                        { name: 'reference_id', type: 'string' },
+                        { name: 'reference_id', type: 'string', isIndexed: true },
                         { name: 'local_uri', type: 'string' },
                         { name: 'status', type: 'string' },
                         { name: 'created_at', type: 'number' },

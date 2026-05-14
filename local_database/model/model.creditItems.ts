@@ -7,6 +7,12 @@ export default class ModelCreditItem extends Model {
     static table = 'credit_items'
 
     // relations
+
+    static associations = {
+        credits: { type: 'belongs_to', key: 'credit_id' },
+        products:{ type: 'belongs_to', key: 'product_id' }
+    } as const
+
     @field('credit_id') creditId!: string
     @field('product_id') productId!: string
 

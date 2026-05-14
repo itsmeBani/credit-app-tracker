@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, useColorScheme, View, Text } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import {TouchableOpacity, useColorScheme, View, Text, Pressable} from "react-native";
+import {useNavigation, useTheme} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Title from "./Title";
 
@@ -13,29 +13,33 @@ type HeaderNavigationProps = {
 
 function HeaderNavigation({
                               title = "Title",
-                                 description="",
+                              description="",
                               onPress,
                               rightComponent,
                           }: HeaderNavigationProps) {
     const { colors } = useTheme();
-
+   const navigate=useNavigation()
     return (
         <View className="" >
 
 
-        <View className=" relative ">
-            <TouchableOpacity style={{zIndex:1111}}
-                onPress={onPress}
-                className="absolute left-0 top-1/2   -translate-y-1/2 shadow-2xl p-3   w-15 h-15 rounded-full"
+        <View className=" flex flex-row justify-between items-center ">
+            <Pressable className="w-10 h-10 items-center justify-center "
+                onPress={()=>navigate.goBack()}
             >
                 <Ionicons name="chevron-back-outline" color={colors.text} size={25} />
-            </TouchableOpacity>
+            </Pressable>
 
 
-            <View className="  items-center">
+            <View  className=" -2 items-center">
                 <Title title={title} description={description}/>
             </View>
 
+            <View className="w-10 justify-center h-10 "
+
+            >
+                {rightComponent}
+            </View>
 
         </View>
 

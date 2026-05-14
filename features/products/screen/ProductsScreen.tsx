@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useState} from 'react';
 
 
 import ProductCategory from "../components/ProductCategory";
@@ -16,21 +16,20 @@ import Products from "../components/Products";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 
-import {useProductActions, useProductSearch} from "../store/store.products";
 import CreateButton from "../components/CreateButton";
 import Search from "../../../shared/components/Search";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 
 function ProductsContent() {
 
 
-   const  search=useProductSearch()
-    const  {setSearch}=useProductActions()
+   const  [search,setSearch]=useState("")
 
 
     return (
         <GestureHandlerRootView className={"flex-1"}>
-            <SafeAreaContainer>
+            <SafeAreaView edges={["top"]}  className={"flex-1 px-3 "}>
                 <Title   description={"Create, edit, and organize your products easily."} title={"Manage Product"} align={"center"}/>
 
 
@@ -41,8 +40,8 @@ function ProductsContent() {
                 />
                 <CreateButton/>
                 <ProductCategory/>
-                <Products search={search} />
-            </SafeAreaContainer>
+                <Products   search={search} />
+            </SafeAreaView>
         </GestureHandlerRootView>
 
     );

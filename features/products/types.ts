@@ -8,6 +8,7 @@ import {manageCategorySchema} from "./schema_validation/category";
 
 export type ProductsProps = {
     products: ModelProducts[];
+
 };
 
 export type GridItem = | ModelProducts | { id: string; empty: true };

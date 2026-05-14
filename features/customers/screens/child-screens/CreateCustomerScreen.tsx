@@ -1,26 +1,30 @@
-import React, { useRef } from "react";
-import { View } from "react-native";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, {useRef} from "react";
+import {View} from "react-native";
+import {Controller, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 
 import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 import Input from "../../../../shared/components/Input";
 import Button from "../../../../shared/components/Button";
-import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {useNavigation} from "@react-navigation/native";
+import {SafeAreaView} from "react-native-safe-area-context";
 import KeyboardAwareContainer from "../../../../shared/components/KeyboardAwareContainer";
 
 
-import { manageCustomerSchema } from "../../schema_validation/customer";
+import {manageCustomerSchema} from "../../schema_validation/customer";
 import {ManageCustomerFormValues} from "../../types";
-import {useCustomersActions} from "../../store/store.customers";
+
+import {CustomersRepository} from "../../data/customers.repository";
+import {CustomerService} from "../../services/customers.service";
 
 function CreateCustomerScreen() {
     const navigation = useNavigation();
     const scrollRef = useRef<any>(null);
 
+    const customerRepository = new CustomersRepository();
+    const customerService = new CustomerService(customerRepository);
 
-  const {createCustomer}=useCustomersActions()
+
     const {
         control,
         handleSubmit,
@@ -35,7 +39,7 @@ function CreateCustomerScreen() {
     });
 
     const onSubmit = async (data: ManageCustomerFormValues) => {
-         createCustomer(data);
+        await customerService.createCustomer(data);
          reset();
         navigation.goBack();
     };
@@ -43,7 +47,7 @@ function CreateCustomerScreen() {
     return (
         <SafeAreaView className="flex-1">
             <HeaderNavigation
-                onPress={() => navigation.goBack()}
+
                 description={"Add a new customer to manage credits"}
                 title={"Create New Customer"}
             />

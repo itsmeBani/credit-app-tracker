@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {SafeAreaView, useSafeAreaInsets,} from "react-native-safe-area-context";
+import {View} from "react-native";
 
 type SafeAreaContainerProps = {
     children: ReactNode;
@@ -10,11 +11,20 @@ export function SafeAreaContainer({
                                       children,
                                       className = "",
                                   }: SafeAreaContainerProps) {
+    const insets = useSafeAreaInsets();
+
     return (
-        <SafeAreaView edges={["top", "left", "right",]}
-            className={`flex-1 px-4 ${className} `}
+        <View
+            style={{
+                flex: 1,
+
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+                paddingLeft: insets.left +10,
+                paddingRight: insets.left +10,
+            }}
         >
             {children}
-        </SafeAreaView>
+        </View>
     );
 }

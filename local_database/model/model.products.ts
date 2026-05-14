@@ -5,6 +5,10 @@ import ModelCredit from './model.credits'
 
 export default class ModelProducts extends Model {
     static table = 'products' as const
+    static associations = {
+        product_categories: { type: 'belongs_to', key: 'category_id' },
+        credits_items:{ type: 'has_many', foreignKey: 'product_id' }
+    } as const
 
     @text('name') name!: string
     @text('description') description!: string | null
@@ -19,7 +23,7 @@ export default class ModelProducts extends Model {
     category!: Relation<ModelProductCategory>
 
     // product → credits
-    @children('credits') credits!: Query<ModelCredit>
+    @children('credits_items') credits_items!: Query<ModelCredit>
 
     @field('created_at') createdAt!: number
     @field('updated_at') updatedAt!: number

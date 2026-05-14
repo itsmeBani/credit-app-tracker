@@ -19,7 +19,7 @@ function CategoryCard({ item, onPress, isActive}: Props) {
 
     return (
         <TouchableOpacity
-            style={{opacity:item?._raw._status === "synced" ? 1 :0.50}}
+            style={{opacity:item?._raw._status === "synced" ? 1 :1}}
             activeOpacity={0.8}
             onPress={onPress}
         >

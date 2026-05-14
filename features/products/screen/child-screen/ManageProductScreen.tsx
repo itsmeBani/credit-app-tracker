@@ -18,18 +18,26 @@ import ProductAvailabilityToggle from "../../components/ui/ProductAvailabilityTo
 import ModelProductCategory from "../../../../local_database/model/model.productCategory";
 import CategoryCard from "../../components/ui/CategoryCard";
 import {ProductCategoryRepository} from "../../data/category.repository";
+import {ProductRepository} from "../../data/product.repository";
+import {ImageUploadService} from "../../../uploads/services/ImageUploadService";
+import {ProductService} from "../../services/product.service";
 
 function ManageProductContent({route}: ManageProductRouteProps) {
     const {productId} = route.params
 
+    const productRepository =new ProductRepository();
+    const imageService=new ImageUploadService()
+    const productService = new ProductService(
+        productRepository,
+        imageService,
+    );
     const isEditMode = !!productId;
 
     const navigate = useNavigation();
 
     const {
         getProductById,
-        updateProduct,
-        createProduct
+
 
     } = useProductActions();
 
@@ -41,6 +49,7 @@ function ManageProductContent({route}: ManageProductRouteProps) {
 
 
     const [categories,setCategories]=useState<ModelProductCategory[]|null>(null)
+
     const {
         control,
         handleSubmit,
@@ -95,16 +104,17 @@ function ManageProductContent({route}: ManageProductRouteProps) {
         loadCategories();
     }, []);
 
-    const back = () => navigate.goBack();
 
     const onSubmit = async (data: ManageProductFormValues) => {
 
 
+
+
             if (isEditMode && selectedProduct?.id) {
-                 updateProduct(selectedProduct.id, data);
+                await productService.updateProduct(selectedProduct.id, data);
 
             } else {
-                 createProduct(data);
+               await productService.createProduct(data);
                  reset();
             }
 
@@ -115,7 +125,7 @@ function ManageProductContent({route}: ManageProductRouteProps) {
     return (
         <SafeAreaView className="flex-1">
             <HeaderNavigation
-                onPress={back}
+
                 title={isEditMode ? "Edit Product" : "Create Product"}
                 description={
                     isEditMode

@@ -11,7 +11,6 @@ export class ProductRepository {
     async create(payload: ProductInsertPayload): Promise<ModelProducts> {
         const currentDate = Date.now();
 
-
         const category = await this.categoryCollection.find(payload.categoryId);
 
         if (!category) {
@@ -41,7 +40,7 @@ export class ProductRepository {
         return await product.update((p) => {
             p.name = payload.name;
             p.description = payload.description;
-            p.price = payload.price;
+            p.price =payload.price;
             p.status = payload.status;
             p.categoryId = payload.categoryId;
             p.updatedAt = Date.now();
@@ -54,7 +53,8 @@ export class ProductRepository {
     }
 
 
-    getObservedProducts(search: string) {
+
+    getAllProducts(search: string) {
         return this.collection
             .query(
                 Q.where(
@@ -62,14 +62,6 @@ export class ProductRepository {
                     Q.like(`%${Q.sanitizeLikeString(search)}%`)
                 )
             )
-            .observeWithColumns([
-                "name",
-                "description",
-                "image_url",
-                "price",
-                "status",
-                "updated_at",
-                "_status",
-            ]);
+
     }
 }

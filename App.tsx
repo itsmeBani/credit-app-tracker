@@ -24,7 +24,7 @@ export default function App() {
                         <Navigation/>
                     </KeyboardProvider>
                     <Toaster theme={"system"} autoWiggleOnUpdate={"toast-change"} swipeToDismissDirection={"left"}
-                             richColors={true} duration={1500} style={{elevation: 0.7}}/>
+                             richColors={true} duration={500} style={{elevation: 0.7}}/>
                 </DatabaseProvider>
             </GestureHandlerRootView>
         </SafeAreaProvider>

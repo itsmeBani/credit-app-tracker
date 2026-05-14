@@ -1,7 +1,9 @@
 import {DarkTheme, DefaultTheme} from "@react-navigation/native";
 
 
-export const NUMBER_COLUMN = 2
+
+export const GRID_COLUMN = 2
+
 export const API_BASE_URL = "https://proud-doorbell-dimmed.ngrok-free.dev/v1";
 
 

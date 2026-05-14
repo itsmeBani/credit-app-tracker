@@ -8,10 +8,14 @@ import CustomerCard from "../component/ui/CustomerCard";
 import Customers from "../component/Customers";
 import IconButton from "../../../shared/components/IconButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import {SafeAreaView} from "react-native-safe-area-context";
+import {useDebounce} from "../../../shared/hooks/useDebounce";
 
 
 function CustomerScreen() {
       const [search,setSearch]=useState("")
+
+      const debounceSearch=useDebounce(search,500)
      const navigation=useNavigation()
 
     const navigateCustomerCreditScreen=()=>{
@@ -20,13 +24,9 @@ function CustomerScreen() {
         })
     }
       return (
-          <SafeAreaContainer>
-              <View className="flex-1  w-full   ">
-                  <Title
-                      title={"Customers"}
-                      align={"center"}
-                      description={"View, manage, and track all customer credits."}
-                  />
+          <SafeAreaView edges={["top"]}  className={"flex-1 px-3 "}>
+              <View className="  w-full  pb-3">
+                  <Title title={"Customers"} description={"Manage Customer credits"}/>
                   <Search
                       value={search}
                       onChangeText={setSearch}
@@ -39,9 +39,10 @@ function CustomerScreen() {
                          label={"Customer"}
                      />
                  </View>
-                 <Customers  search={""}  />
+
               </View>
-          </SafeAreaContainer>
+              <Customers  search={debounceSearch}  />
+          </SafeAreaView>
 
     );
 }

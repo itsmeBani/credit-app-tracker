@@ -1,37 +1,64 @@
 import {useNavigation} from "@react-navigation/native";
-import {useState} from "react";
-import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
+import React, {useRef} from "react";
 import {View} from "react-native";
-import Title from "../../../../shared/components/Title";
 import IconButton from "../../../../shared/components/IconButton";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 
-function CustomerItemsCreditScreen() {
+import AntDesign from "@expo/vector-icons/AntDesign";
 
-    const navigation=useNavigation()
+import {CustomerItemsCreditParams} from "../../types";
+import CreditsRepository from "../../data/credits.repository";
+import {CreditsService} from "../../services/credits.service";
+import CreateItemCreditModal, {CreateItemCreditModalRef} from "../../component/CreateItemCredit";
+import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
+import CustomerItemsCredit from "../../component/CustomerItemsCredit";
 
 
+const creditsRepository = new CreditsRepository()
+const creditsService = new CreditsService(creditsRepository)
+
+function CustomerItemsCreditScreen({
+                                       route,
+                                   }: CustomerItemsCreditParams) {
+    const {creditId} = route.params;
+
+    const modalRef = useRef<CreateItemCreditModalRef>(null);
+
+
+    if (!creditId) return null;
+
+
+    const openCreateItemModal=()=>{
+
+        modalRef.current?.open()
+    }
     return (
         <SafeAreaContainer>
-            <View className="flex-1  w-full   ">
-                <HeaderNavigation onPress={()=>navigation.goBack()}
-                    title={"Manage Items"}
+            <HeaderNavigation title={"Manage Items"} description={"View, Manage, and track all credit items"}/>
+            <View className="flex-1 w-full">
 
-                    description={"View, manage, and track all credit items."}
-                />
 
-                <View className="flex py-2 w-full flex-row  gap-2">
+                <View className="flex-row py-2 gap-2">
                     <IconButton
-
-                                icon={<AntDesign name="plus" size={15} color="white" />}
-                                label={"New"}
+                        icon={
+                            <AntDesign
+                                name="plus"
+                                size={15}
+                                color="white"
+                            />
+                        }
+                        label={"New"}
+                        onPress={openCreateItemModal}
                     />
                 </View>
 
-            </View>
-        </SafeAreaContainer>
+              <CustomerItemsCredit creditId={creditId}/>
 
+            </View>
+
+            <CreateItemCreditModal creditId={creditId}  ref={modalRef}/>
+
+        </SafeAreaContainer>
     );
 }
 

@@ -4,8 +4,13 @@ import ModelCredit from './model.credits'
 
 export default class ModelPayment extends Model {
     static table = 'payments'
+    static associations = {
+        credits: {
+            type: 'belongs_to',
+            key: 'credit_id',
+        },
+    } as const
 
-    // relation
     @field('credit_id') creditId!: string
 
     @relation('credits', 'credit_id')

@@ -8,16 +8,18 @@ import IconButton from "../../../../shared/components/IconButton";
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {CreditStatusBadge} from "./CreditStatusBadge";
+import {withObservables} from "@nozbe/watermelondb/react";
+import {formatAmount} from "../../../../shared/utils/formatAmount";
 
-export default function CustomerCreditStatus({
-                                                 onPress,
-                                                 data
-                                             }: CustomerCreditStatusProps) {
+function CustomerCreditStatus({
+                                  onPress,
+                                  credit
+                              }: CustomerCreditStatusProps) {
 
 
     const {colors} = useTheme();
-    const theme = useColorScheme()
-    const {totalAmount, paidAmount, createdAt, status} = data
+
+    const {totalAmount, paidAmount, createdAt, status} = credit
     return (
         <View style={{backgroundColor: colors.card}}
               className="w-full  flex flex-col gap-3 p-6 border dark:border-gray-50/5  border-gray-200    rounded-lg"
@@ -40,17 +42,18 @@ export default function CustomerCreditStatus({
                     <Text className=" font-jakarta dark:text-gray-200 text-slate-700 font-medium text-sm">
                         Total Credit
                     </Text>
-                    <Text className=" font-jakarta dark:text-gray-200 text-slate-700 text-lg font-bold">
-                        {totalAmount}
+                    <Text className=" font-jakarta dark:text-gray-200 text-slate-500 text-lg font-bold">
+                        {formatAmount(totalAmount)}
                     </Text>
                 </View>
 
                 <View>
-                    <Text className=" font-jakarta dark:text-gray-200 text-slate-700 font-medium text-sm">
+                    <Text className=" font-jakarta dark:text-gray-200  text-slate-700 font-medium text-sm">
                         Paid Amount
                     </Text>
-                    <Text className=" font-jakarta dark:text-gray-200 text-slate-700 text-lg font-bold">
-                        {paidAmount}
+                    <Text className=" font-jakarta dark:text-gray-200  text-slate-500 text-lg font-bold">
+                        {formatAmount(paidAmount)}
+
                     </Text>
                 </View>
             </View>
@@ -59,18 +62,24 @@ export default function CustomerCreditStatus({
 
                 <View>
                     <Text className=" font-jakarta dark:text-gray-200 font-medium text-sm">
-                        Remaining
+                        Balance
                     </Text>
-                    <Text className=" font-jakarta dark:text-gray-200 text-slate-700 text-3xl font-bold">
-                        {totalAmount - paidAmount}
-                    </Text>
+                    <Text className=" font-jakarta dark:text-gray-200  text-orange-400 text-2xl font-bold">
+                        {formatAmount(totalAmount - paidAmount)}</Text>
                 </View>
                 <View>
 
-                    <IconButton onPress={onPress} icon={<MaterialCommunityIcons name="package-variant-closed" size={17} color="white"/>}
+                    <IconButton onPress={onPress}
+                                icon={<MaterialCommunityIcons name="package-variant-closed" size={17} color="white"/>}
                                 label={"Items"}/>
                 </View>
             </View>
         </View>
     );
 }
+
+// const enhance = withObservables(['credit'], ({credit}) => ({
+//     credit,
+// }))
+// export default enhance(CustomerCreditStatus)
+export default CustomerCreditStatus

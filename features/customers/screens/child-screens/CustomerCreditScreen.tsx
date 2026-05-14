@@ -1,47 +1,33 @@
-import React, {useEffect, useRef} from 'react';
-import {FlatList, View} from "react-native";
+import React, {useRef} from 'react';
+import {Text, View} from "react-native";
 import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
-import {CustomerCreditParams, CustomerCreditsProps} from "../../types";
-import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
+import {CustomerCreditParams} from "../../types";
 import {useNavigation} from "@react-navigation/native";
-import CustomerCreditStatus from "../../component/ui/CustomerCreditStatus";
 import IconButton from "../../../../shared/components/IconButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import {useCreditsActions, useCustomerCredits} from "../../store/store.credits";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ActionBottomSheet from "../../../../shared/components/ActionSheetModal";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-
+import CustomerCredits from "../../component/CustomerCredits";
+import CreditsRepository from "../../data/credits.repository";
+import {CreditsService} from "../../services/credits.service";
+import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 
 function CustomerCreditScreen({route}: CustomerCreditParams) {
-    const {id} = route.params
+     const {id,lastname,firstname} = route.params
+    const creditsRepository = new CreditsRepository()
+    const creditsService = new CreditsService(creditsRepository)
 
-    const {createCredits, getCustomerCredits} = useCreditsActions()
-
-   const credits=useCustomerCredits()
-
-    useEffect(() => {
-        getCustomerCredits(id)
-    }, [id]);
-
-    const navigation = useNavigation();
 
     const bottomSheetRef = useRef<BottomSheet>(null);
 
-    const back = () => navigation.goBack();
-
-    const navigateCustomerItemsCreditScreen=()=>{
-        navigation.navigate('Main', {
-            screen: 'ManageCustomerItemsCredit',
-        })
-    }
     const openBottomSheet = () => {
         bottomSheetRef.current?.expand();
     };
 
-    const handleCreateCredits=()=>{
-          createCredits(id)
-          bottomSheetRef?.current?.close();
+    const handleCreateCredits = async () => {
+        await creditsService.createCredits(id)
+        bottomSheetRef?.current?.close();
     }
 
 
@@ -49,33 +35,30 @@ function CustomerCreditScreen({route}: CustomerCreditParams) {
     return (
 
         <SafeAreaContainer>
-            <View className="flex-1  w-full   ">
-                <HeaderNavigation onPress={back}
-                                  title={"Customer Credit"}
-                                  description={"Add a new credit to the customer."}
+
+            <HeaderNavigation title={firstname + " " +lastname} description={"Manage Customer credits"}/>
+             <View className="flex flex-row  justify-between pb-5 py-3">
+
+                <IconButton
+                    onPress={openBottomSheet}
+                    icon={<AntDesign name="plus" size={15} color="white" />}
+                    label={"Credit"}
                 />
-                <View className=" flex items-start py-3">
-                    <IconButton onPress={openBottomSheet}
-
-                                icon={<AntDesign name="plus" size={15} color="white"/>}
-                                label={"Credit"}
-                    />
-                </View>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={credits}
-
-                    contentContainerClassName={"gap-2 pb-20"}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({item}) => (
-                        <CustomerCreditStatus key={item.id} onPress={()=>{navigateCustomerItemsCreditScreen()}} data={item}/>
-                    )}
-                />
-
             </View>
+
+                <CustomerCredits  creditId={id}/>
+
+
+
             <ActionBottomSheet
                 ref={bottomSheetRef}
-                icon={<MaterialCommunityIcons name="alert-circle-outline" size={18} color={"#2563eb"} />}
+                icon={
+                    <MaterialCommunityIcons
+                        name="alert-circle-outline"
+                        size={18}
+                        color={"#2563eb"}
+                    />
+                }
                 title="Create Credit"
                 description="This will create a new credit record for the customer."
                 confirmLabel="Create"
@@ -87,20 +70,5 @@ function CustomerCreditScreen({route}: CustomerCreditParams) {
     )
 }
 
-// const creditsRepository = new CreditsRepository();
-//
-// const enhance = withObservables(
-//     ["route"],
-//     ({route}: CustomerCreditParams) => {
-//         const {id} = route.params;
-//         return {
-//             credits: creditsRepository.getObservedCredits(id),
-//         };
-//     }
-// );
-//
-// export default enhance(CustomerCreditScreen)
-//
-//
 
 export default CustomerCreditScreen

@@ -1,6 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import {View} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 export default function CustomerCreditStatusSkeleton() {
     const { colors } = useTheme();

@@ -13,16 +13,12 @@ import KeyboardAwareContainer from "../../../../shared/components/KeyboardAwareC
 
 import {manageCustomerSchema} from "../../schema_validation/customer";
 import {ManageCustomerFormValues} from "../../types";
+import {customersService} from "../../services/customers.service";
 
-import {CustomersRepository} from "../../data/customers.repository";
-import {CustomerService} from "../../services/customers.service";
 
 function CreateCustomerScreen() {
     const navigation = useNavigation();
     const scrollRef = useRef<any>(null);
-
-    const customerRepository = new CustomersRepository();
-    const customerService = new CustomerService(customerRepository);
 
 
     const {
@@ -39,7 +35,7 @@ function CreateCustomerScreen() {
     });
 
     const onSubmit = async (data: ManageCustomerFormValues) => {
-        await customerService.createCustomer(data);
+        await customersService.createCustomer(data);
          reset();
         navigation.goBack();
     };

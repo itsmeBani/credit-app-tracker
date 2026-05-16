@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, useColorScheme, View} from "react-native";
-import {ImageOff, Package, PackageOpenIcon} from "lucide-react-native";
+import {Package} from "lucide-react-native";
 
 function CreditEmpty() {
     const theme = useColorScheme();

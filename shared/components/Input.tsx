@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-    View,
-    Text,
-    TextInput as RNTextInput,
-    TouchableOpacity,
-    TextInputProps,
-} from "react-native";
+import React, {useState} from "react";
+import {Text, TextInput as RNTextInput, TextInputProps, TouchableOpacity, View,} from "react-native";
 
 type BaseProps = {
     label?: string;

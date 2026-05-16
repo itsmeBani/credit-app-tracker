@@ -3,13 +3,12 @@ import {View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import Title from "../../../shared/components/Title";
 import Search from "../../../shared/components/Search";
-import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
-import CustomerCard from "../component/ui/CustomerCard";
 import Customers from "../component/Customers";
 import IconButton from "../../../shared/components/IconButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import {SafeAreaView} from "react-native-safe-area-context";
+
 import {useDebounce} from "../../../shared/hooks/useDebounce";
+import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
 
 
 function CustomerScreen() {
@@ -24,7 +23,7 @@ function CustomerScreen() {
         })
     }
       return (
-          <SafeAreaView edges={["top"]}  className={"flex-1 px-3 "}>
+          <SafeAreaContainer disablePaddingBottom={true}  >
               <View className="  w-full  pb-3">
                   <Title title={"Customers"} description={"Manage Customer credits"}/>
                   <Search
@@ -42,7 +41,7 @@ function CustomerScreen() {
 
               </View>
               <Customers  search={debounceSearch}  />
-          </SafeAreaView>
+          </SafeAreaContainer>
 
     );
 }

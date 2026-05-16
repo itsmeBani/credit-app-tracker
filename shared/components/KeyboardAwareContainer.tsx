@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, {forwardRef} from "react";
 import {KeyboardAwareScrollView} from "react-native-keyboard-controller";
 
 type Props = {

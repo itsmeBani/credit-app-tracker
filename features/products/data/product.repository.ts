@@ -1,7 +1,7 @@
-import { localDatabase } from "../../../local_database";
+import {localDatabase} from "../../../local_database";
 import ModelProducts from "../../../local_database/model/model.products";
-import { ProductInsertPayload, ProductUpdatePayload } from "../types";
-import { Q } from "@nozbe/watermelondb";
+import {ProductInsertPayload, ProductUpdatePayload} from "../types";
+import {Q} from "@nozbe/watermelondb";
 
 export class ProductRepository {
     private collection = localDatabase.get<ModelProducts>("products");

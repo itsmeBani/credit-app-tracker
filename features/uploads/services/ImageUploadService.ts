@@ -1,20 +1,16 @@
-import { enqueueImageUpload } from "../data/enqueueImageUpload";
-import { fetchQueueImages } from "../data/fetchQueueImages";
-import { uploadImageToCloud } from "../data/uploadImageToStorage";
-import { updateQueueItemStatus } from "../data/updateQueueItemStatus";
+import {enqueueImageUpload} from "../data/enqueueImageUpload";
+import {fetchQueueImages} from "../data/fetchQueueImages";
+import {uploadImageToCloud} from "../data/uploadImageToStorage";
+import {updateQueueItemStatus} from "../data/updateQueueItemStatus";
 
-import { appToast } from "../../../shared/components/toast";
-import { localDatabase } from "../../../local_database";
+import {appToast} from "../../../shared/components/toast";
+import {localDatabase} from "../../../local_database";
 
-import {
-    EnqueueImageUploadParams,
-    UploadQueueTable,
-} from "../types";
+import {EnqueueImageUploadParams, UploadQueueTable,} from "../types";
 
-import { imageUpdateResolvers } from "../resolvers/imageUpdateResolvers";
+import {imageUpdateResolvers} from "../resolvers/imageUpdateResolvers";
 
-import { Directory, Paths } from "expo-file-system";
-import { File as ExpoFile } from "expo-file-system";
+import {Directory, File as ExpoFile, Paths} from "expo-file-system";
 
 export class ImageUploadService {
 
@@ -47,7 +43,7 @@ export class ImageUploadService {
 
                     await updateQueueItemStatus(item.id, "uploaded");
 
-                } catch (error) {
+                } catch  {
                     await updateQueueItemStatus(item.id, "failed");
 
                 }

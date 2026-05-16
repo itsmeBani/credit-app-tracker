@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from "react-native";
+import {View} from "react-native";
 import IconButton from "../../../shared/components/IconButton";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 function CreateButton() {

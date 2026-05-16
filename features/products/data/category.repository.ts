@@ -1,5 +1,5 @@
-import { CategoryInsertPayload } from "../types";
-import { localDatabase } from "../../../local_database";
+import {CategoryInsertPayload} from "../types";
+import {localDatabase} from "../../../local_database";
 import ModelProductCategory from "../../../local_database/model/model.productCategory";
 
 export class ProductCategoryRepository {

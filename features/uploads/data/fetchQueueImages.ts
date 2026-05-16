@@ -1,6 +1,6 @@
 import ModelImageUploadQueue from "../../../local_database/model/model.imageUploadQueue";
-import { localDatabase } from "../../../local_database";
-import { Q } from "@nozbe/watermelondb";
+import {localDatabase} from "../../../local_database";
+import {Q} from "@nozbe/watermelondb";
 
 export const fetchQueueImages = async () => {
     const collection = localDatabase.get<ModelImageUploadQueue>('image_upload_queue');

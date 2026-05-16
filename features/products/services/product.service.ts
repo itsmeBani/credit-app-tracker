@@ -1,8 +1,8 @@
-import { ProductRepository } from "../data/product.repository";
-import { ProductInsertPayload, ProductUpdatePayload } from "../types";
-import { ImageUploadService } from "../../uploads/services/ImageUploadService";
-import { appToast } from "../../../shared/components/toast";
-import { localDatabase } from "../../../local_database";
+import {ProductRepository} from "../data/product.repository";
+import {ProductInsertPayload, ProductUpdatePayload} from "../types";
+import {ImageUploadService} from "../../uploads/services/ImageUploadService";
+import {appToast} from "../../../shared/components/toast";
+import {localDatabase} from "../../../local_database";
 
 
 export class ProductService {
@@ -71,3 +71,10 @@ export class ProductService {
         }
     }
 }
+
+export const productRepository =new ProductRepository();
+export const imageService=new ImageUploadService()
+export const productService = new ProductService(
+    productRepository,
+    imageService,
+);

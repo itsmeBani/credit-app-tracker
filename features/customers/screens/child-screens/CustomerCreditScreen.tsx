@@ -1,23 +1,18 @@
 import React, {useRef} from 'react';
-import {Text, View} from "react-native";
+import {View} from "react-native";
 import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
 import {CustomerCreditParams} from "../../types";
-import {useNavigation} from "@react-navigation/native";
 import IconButton from "../../../../shared/components/IconButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ActionBottomSheet from "../../../../shared/components/ActionSheetModal";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import CustomerCredits from "../../component/CustomerCredits";
-import CreditsRepository from "../../data/credits.repository";
-import {CreditsService} from "../../services/credits.service";
+import {creditsService} from "../../services/credits.service";
 import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 
 function CustomerCreditScreen({route}: CustomerCreditParams) {
      const {id,lastname,firstname} = route.params
-    const creditsRepository = new CreditsRepository()
-    const creditsService = new CreditsService(creditsRepository)
-
 
     const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -47,6 +42,7 @@ function CustomerCreditScreen({route}: CustomerCreditParams) {
             </View>
 
                 <CustomerCredits  creditId={id}/>
+
 
 
 

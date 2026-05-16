@@ -8,7 +8,7 @@ export  class  CustomerService{
     async createCustomer (payload:CustomerInsertPayload){
         try {
             await localDatabase.write(async () => {
-                const newCustomer=await this.customerRepository.create(payload)
+                await this.customerRepository.create(payload)
 
                 appToast.success("Customer Created","Successfully created")
             })
@@ -20,3 +20,7 @@ export  class  CustomerService{
 
     }
 }
+
+
+export const customersRepository = new CustomersRepository();
+export  const customersService=new CustomerService(customersRepository)

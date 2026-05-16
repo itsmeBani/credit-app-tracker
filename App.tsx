@@ -1,5 +1,5 @@
 import * as React from 'react';
-import 'react-native-gesture-handler';
+
 import "./global.css"
 
 
@@ -20,11 +20,16 @@ export default function App() {
         <SafeAreaProvider>
             <GestureHandlerRootView>
                 <DatabaseProvider database={localDatabase}>
-                    <KeyboardProvider>
-                        <Navigation/>
-                    </KeyboardProvider>
-                    <Toaster theme={"system"} autoWiggleOnUpdate={"toast-change"} swipeToDismissDirection={"left"}
-                             richColors={true} duration={500} style={{elevation: 0.7}}/>
+                       <KeyboardProvider>
+                             <Navigation/>
+                          </KeyboardProvider>
+                        <Toaster
+                            theme={"system"}
+                            autoWiggleOnUpdate={"toast-change"}
+                            swipeToDismissDirection={"left"}
+                            richColors={true}
+                            duration={500}
+                            style={{elevation: 0.7}}/>
                 </DatabaseProvider>
             </GestureHandlerRootView>
         </SafeAreaProvider>

@@ -9,23 +9,18 @@ import Login from "../features/authentication/screens/Login";
 import {createStaticNavigation, StaticParamList} from "@react-navigation/native";
 import * as React from "react";
 import ManageProductScreen from "../features/products/screen/child-screen/ManageProductScreen";
-import {Button, Text, useColorScheme, View} from "react-native";
+import {useColorScheme} from "react-native";
 
 
 import {StatusBar} from "expo-status-bar";
 import {useSyncActions} from "../features/sync/store/sync";
 import {useDatabase} from "@nozbe/watermelondb/hooks";
-import {useSyncOnDatabaseChange} from "../features/sync/hook/useDatabaseChanges";
 import {useAutoSyncOnNetwork} from "../shared/hooks/useAutoSyncOnNetwork";
 import CreateCategoryScreen from "../features/products/screen/child-screen/CreateCategoryScreen";
-import {ImageUploadService} from "../features/uploads/services/ImageUploadService";
 import {DarkCustomTheme, LightTheme} from "../shared/utils/constant";
 import CustomerCreditScreen from "../features/customers/screens/child-screens/CustomerCreditScreen";
 import CreateCustomerScreen from "../features/customers/screens/child-screens/CreateCustomerScreen";
 import CustomerItemsCreditScreen from "../features/customers/screens/child-screens/CustomerItemsCreditScreen";
-import {SafeAreaView} from "react-native-safe-area-context";
-import HeaderNavigation from "../shared/components/HeaderNavigation";
-import Title from "../shared/components/Title";
 
 const Tabs = createBottomTabNavigator({
 
@@ -160,18 +155,17 @@ export default function Navigation() {
     const theme = scheme === "dark" ? DarkCustomTheme : LightTheme;
     const {sync} = useSyncActions()
 
-    const database = useDatabase();
 
 
-    useSyncOnDatabaseChange({
-        database: database,
-        tables: ["products", "customers", "credits", "product_categories"],
-        delay: 20000,
-        onSyncTrigger: async () => {
-
-            await sync()
-        },
-    })
+    // useSyncOnDatabaseChange({
+    //     database: database,
+    //     tables: ["products", "customers", "credits", "product_categories","payments"],
+    //     delay: 20000,
+    //     onSyncTrigger: async () => {
+    //
+    //         await sync()
+    //     },
+    // })
 
 
     useAutoSyncOnNetwork({

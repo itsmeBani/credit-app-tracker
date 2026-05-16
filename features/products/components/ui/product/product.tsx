@@ -3,6 +3,7 @@ import {Minus, Plus} from "lucide-react-native";
 import {Image} from "expo-image";
 import React from "react";
 import {formatAmount} from "../../../../../shared/utils/formatAmount";
+import {useTheme} from "@react-navigation/native";
 
 
 const baseStyle = " p-2 flex-1 border flex flex-row justify-between border-slate-500/10 rounded-md"
@@ -82,10 +83,11 @@ export const ProductCard = () => {
 }
 
 export const ProductCardAction = ({onPress, image, name, description, price,decrementQuantity,incrementQuantity,quantity,subTotal}: ProductCardActionProps) => {
+    const {colors} = useTheme();
 
 
     return (
-        <View className={baseStyle}>
+        <View style={{backgroundColor:colors.card}} className={baseStyle} >
 
 
             <View className="flex-1 gap-4 py-2 flex-row">
@@ -106,13 +108,13 @@ export const ProductCardAction = ({onPress, image, name, description, price,decr
                         className={`font-jakarta   dark:text-gray-200  text-[10px] text-slate-600 `}>{formatAmount(price)}</Text>
 
                     <View className="flex flex-row pt-3 pr-3">
-                        <Pressable onPress={decrementQuantity} className={"h-7 w-7 rounded-md items-center justify-center  bg-blue-600 "}>
-                            <Minus color={"white"} strokeWidth={3} size={16}/>
+                        <Pressable onPress={decrementQuantity} className={"h-7 w-7 rounded-md items-center justify-center dark:bg-gray-100/10  bg-gray-200/60 "}>
+                            <Minus color={colors.primary} strokeWidth={3} size={16}/>
                         </Pressable>
                         <View className={"h-7 px-3 bg--500 items-center justify-center "}>
-                            <Text className="font-bold font-jakarta text-slate-600 leading-4">{quantity}</Text>
+                            <Text className="font-bold font-jakarta text-slate-600 leading-4  dark:text-white  ">{quantity}</Text>
                         </View>
-                        <Pressable onPress={incrementQuantity} className={"h-7 w-7 rounded-md  items-center justify-center bg-blue-600 "}>
+                        <Pressable onPress={incrementQuantity} className={"h-7  w-7 rounded-md  items-center justify-center bg-blue-600 "}>
                             <Plus color={"white"} strokeWidth={3} size={16}/>
                         </Pressable>
                     </View>
@@ -121,8 +123,8 @@ export const ProductCardAction = ({onPress, image, name, description, price,decr
             </View>
             <View className="pr-5 items-end">
 
-                <Text className="font-jakarta text-blue-600 font-extrabold text-lg">{formatAmount(subTotal)}</Text>
-                <Text className="font-jakarta text-xs font-medium text-slate-600 ">{quantity}X</Text>
+                <Text className="font-jakarta text-blue-600 dark:text-white font-extrabold text-lg">{formatAmount(subTotal)}</Text>
+                <Text className="font-jakarta text-xs font-medium text-slate-600  bg-gray-100 dark:bg-gray-100/10 px-3 font-semibold py-1 rounded-full dark:text-gray-200   ">{quantity}X</Text>
             </View>
 
         </View>

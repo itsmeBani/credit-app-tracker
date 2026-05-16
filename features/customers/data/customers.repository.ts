@@ -1,7 +1,7 @@
-import { CustomerInsertPayload } from "../types";
-import { localDatabase } from "../../../local_database";
+import {CustomerInsertPayload} from "../types";
+import {localDatabase} from "../../../local_database";
 import ModelCustomers from "../../../local_database/model/modelCustomers";
-import { Q } from "@nozbe/watermelondb";
+import {Q} from "@nozbe/watermelondb";
 
 export class CustomersRepository {
     private collection = localDatabase.get<ModelCustomers>("customers");

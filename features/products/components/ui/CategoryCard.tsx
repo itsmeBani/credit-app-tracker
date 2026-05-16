@@ -1,8 +1,7 @@
 import React from "react";
-import { TouchableOpacity, Text, View } from "react-native";
-import { useColorScheme } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { Image } from 'expo-image';
+import {Text, TouchableOpacity, useColorScheme, View} from "react-native";
+import {useTheme} from "@react-navigation/native";
+import {Image} from 'expo-image';
 import ModelProductCategory from "../../../../local_database/model/model.productCategory";
 
 type Props = {

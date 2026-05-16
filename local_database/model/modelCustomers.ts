@@ -1,4 +1,4 @@
-import { Model, Relation, Query } from '@nozbe/watermelondb'
+import { Model, Query } from '@nozbe/watermelondb'
 import { field, text, children } from '@nozbe/watermelondb/decorators'
 import ModelCredit from './model.credits'
 

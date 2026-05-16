@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {z} from "zod";
 
 const parsePrice = (val: string) => Number(val.replace(/,/g, ""));
 

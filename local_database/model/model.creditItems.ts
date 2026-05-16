@@ -1,5 +1,5 @@
 import { Model, Relation } from '@nozbe/watermelondb'
-import { field, relation, text } from '@nozbe/watermelondb/decorators'
+import { field, relation} from '@nozbe/watermelondb/decorators'
 import ModelCredit from './model.credits'
 import ModelProducts from './model.products'
 

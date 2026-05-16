@@ -99,6 +99,13 @@ export class CreditsRepository {
     async getCreditById(id:string){
      return  await this.creditsCollection.find(id)
     }
+    getObserveCreditById(id:string){
+        return   this.creditsCollection.findAndObserve(id)
+    }
+    getCreditItemCounts(id:string){
+                return this.creditItemsCollection.query(
+                    Q.where("credit_id",id)).observeCount()
+    }
 
 
 

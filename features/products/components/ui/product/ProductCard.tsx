@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, useColorScheme, View} from "react-native";
 
 import {useTheme} from "@react-navigation/native";
-import { Image } from 'expo-image';
+import {Image} from 'expo-image';
 import ModelProducts from "../../../../../local_database/model/model.products";
 
 interface ProductCardProps {

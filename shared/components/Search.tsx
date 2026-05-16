@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import {View, TextInput, TouchableOpacity, TextInputProps, useColorScheme} from "react-native";
-import { Feather } from "@expo/vector-icons";
+import React, {useState} from "react";
+import {TextInput, TextInputProps, TouchableOpacity, useColorScheme, View} from "react-native";
+import {Feather} from "@expo/vector-icons";
 
 type SearchProps = {
     value: string;

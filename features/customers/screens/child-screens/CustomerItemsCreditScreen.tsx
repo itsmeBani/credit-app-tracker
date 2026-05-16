@@ -1,4 +1,3 @@
-import {useNavigation} from "@react-navigation/native";
 import React, {useRef} from "react";
 import {View} from "react-native";
 import IconButton from "../../../../shared/components/IconButton";
@@ -7,15 +6,10 @@ import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 import {CustomerItemsCreditParams} from "../../types";
-import CreditsRepository from "../../data/credits.repository";
-import {CreditsService} from "../../services/credits.service";
 import CreateItemCreditModal, {CreateItemCreditModalRef} from "../../component/CreateItemCredit";
 import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
 import CustomerItemsCredit from "../../component/CustomerItemsCredit";
-
-
-const creditsRepository = new CreditsRepository()
-const creditsService = new CreditsService(creditsRepository)
+import ItemsTotalCard from "../../component/ui/ItemsTotalCard";
 
 function CustomerItemsCreditScreen({
                                        route,
@@ -24,18 +18,16 @@ function CustomerItemsCreditScreen({
 
     const modalRef = useRef<CreateItemCreditModalRef>(null);
 
-
     if (!creditId) return null;
 
 
     const openCreateItemModal=()=>{
-
         modalRef.current?.open()
     }
     return (
-        <SafeAreaContainer>
+        <SafeAreaContainer horizontalPadding={0}>
             <HeaderNavigation title={"Manage Items"} description={"View, Manage, and track all credit items"}/>
-            <View className="flex-1 w-full">
+            <View className="flex-1 px-3 w-full">
 
 
                 <View className="flex-row py-2 gap-2">
@@ -52,11 +44,13 @@ function CustomerItemsCreditScreen({
                     />
                 </View>
 
-              <CustomerItemsCredit creditId={creditId}/>
+                <CustomerItemsCredit creditId={creditId}/>
 
             </View>
 
-            <CreateItemCreditModal creditId={creditId}  ref={modalRef}/>
+            <ItemsTotalCard creditId={creditId} />
+
+            <CreateItemCreditModal creditId={creditId} ref={modalRef} />
 
         </SafeAreaContainer>
     );

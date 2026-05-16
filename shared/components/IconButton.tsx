@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, Text, View, PressableProps } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import {Pressable, PressableProps, Text, useColorScheme, View} from "react-native";
+import {useTheme} from "@react-navigation/native";
+import Feather from '@expo/vector-icons/Feather';
 
 type Variant = "primary" | "outline" | "ghost";
 
@@ -13,6 +14,7 @@ type IconButtonProps = PressableProps & {
     containerClassName?: string;
     textClassName?: string;
     iconClassName?: string;
+
 };
 
 function IconButton({
@@ -20,6 +22,7 @@ function IconButton({
                         onPress,
                         icon,
                         disabled,
+
                         variant = "primary",
                         containerClassName = "",
                         textClassName = "",
@@ -28,7 +31,8 @@ function IconButton({
                     }: IconButtonProps) {
 
     const { colors } = useTheme();
-
+   const theme =useColorScheme()
+    const isDark=theme === "dark"
     const variants = {
         primary: {
             container: {
@@ -43,10 +47,10 @@ function IconButton({
             container: {
                 backgroundColor: "transparent",
                 borderWidth: 1,
-                borderColor: colors.primary,
+                borderColor:isDark ? "rgba(255,255,255,0.47)" : colors.primary,
             },
             text: {
-                color: colors.primary,
+                color:isDark ? "#FFFFFF" : colors.primary,
             },
         },
 
@@ -84,7 +88,7 @@ function IconButton({
                 shadowRadius: 5,
 
                 // Android shadow
-                elevation: variant === "primary" ? 6 : 0,
+                elevation: variant === "primary" ? 4 : 0,
 
                 opacity: disabled ? 0.6 : 1,
             }}
@@ -93,7 +97,7 @@ function IconButton({
         >
             {icon && (
                 <View className={iconClassName}>
-                    {icon}
+                    {disabled ? <Feather name="loader" size={20} color="white" className="animate-spin" />:   icon}
                 </View>
             )}
 

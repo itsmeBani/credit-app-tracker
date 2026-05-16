@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, View} from "react-native";
+import {FlatList, View} from "react-native";
 import ProductCard from "./ui/product/ProductCard";
 import {ProductsProps} from "../types";
 import {useNavigation} from "@react-navigation/native";

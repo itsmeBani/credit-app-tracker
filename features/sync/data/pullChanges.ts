@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { MigrationSyncChanges } from "@nozbe/watermelondb/Schema/migrations/getSyncChanges";
+import {MigrationSyncChanges} from "@nozbe/watermelondb/Schema/migrations/getSyncChanges";
 import {SyncPullResult} from "@nozbe/watermelondb/sync";
 import {API_BASE_URL} from "../../../shared/utils/constant";
 

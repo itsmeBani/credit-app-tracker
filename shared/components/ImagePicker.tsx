@@ -1,8 +1,6 @@
 import React, {useEffect} from "react";
-import {View, Text, Pressable, useColorScheme} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {Pressable, Text, useColorScheme, View} from "react-native";
 import {ImageOff} from "lucide-react-native";
-import {useTheme} from "@react-navigation/native";
 import {useImageManager} from "../hooks/useImagePicker";
 import {ImagePickerAsset} from "expo-image-picker";
 import {Image} from "expo-image";

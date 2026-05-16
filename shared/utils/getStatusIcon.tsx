@@ -2,7 +2,6 @@ import {SyncStatus} from "../../features/sync/store/sync";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Feather from '@expo/vector-icons/Feather';
-import AntDesign from "@expo/vector-icons/AntDesign";
 import React from "react";
 
 export const getStatusIcon = (status: SyncStatus) => {

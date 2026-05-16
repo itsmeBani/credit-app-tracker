@@ -6,28 +6,18 @@ import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 import Input from "../../../../shared/components/Input";
 import ColorPicker from "../../../../shared/components/ColorPicker";
 import Button from "../../../../shared/components/Button";
-import {useNavigation} from "@react-navigation/native";
+
 import ImagePicker from "../../../../shared/components/ImagePicker";
 import {SafeAreaView} from "react-native-safe-area-context";
 import KeyboardAwareContainer from "../../../../shared/components/KeyboardAwareContainer";
 import {ManageCategoryFormValues} from "../../types";
 import {manageCategorySchema} from "../../schema_validation/category";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ImageUploadService} from "../../../uploads/services/ImageUploadService";
-import {ProductCategoryRepository} from "../../data/category.repository";
-import {ProductCategoryService} from "../../services/category.service";
+import {productCategoryService} from "../../services/category.service";
 
 
 function CreateCategoryScreen() {
-    const navigation = useNavigation();
 
-    const categoryRepository = new ProductCategoryRepository();
-    const imageService = new ImageUploadService();
-
-     const productCategoryService = new ProductCategoryService(
-        categoryRepository,
-        imageService
-    );
     const scrollRef = useRef<any>(null);
 
 

@@ -1,5 +1,5 @@
-import { Observable } from "@nozbe/watermelondb/utils/rx";
-import { useEffect, useState } from "react";
+import {Observable} from "@nozbe/watermelondb/utils/rx";
+import {useEffect, useState} from "react";
 
 export default function useObservable<T>(
     observable?: Observable<T>

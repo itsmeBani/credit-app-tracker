@@ -1,8 +1,8 @@
-import { CategoryInsertPayload } from "../types";
-import { ProductCategoryRepository } from "../data/category.repository";
-import { ImageUploadService } from "../../uploads/services/ImageUploadService";
-import { appToast } from "../../../shared/components/toast";
-import { localDatabase } from "../../../local_database";
+import {CategoryInsertPayload} from "../types";
+import {ProductCategoryRepository} from "../data/category.repository";
+import {ImageUploadService} from "../../uploads/services/ImageUploadService";
+import {appToast} from "../../../shared/components/toast";
+import {localDatabase} from "../../../local_database";
 
 export class ProductCategoryService {
     constructor(
@@ -40,3 +40,11 @@ export class ProductCategoryService {
         }
     }
 }
+
+export const categoryRepository = new ProductCategoryRepository();
+export const imageService = new ImageUploadService();
+
+export const productCategoryService = new ProductCategoryService(
+    categoryRepository,
+    imageService
+);

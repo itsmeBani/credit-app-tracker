@@ -1,5 +1,4 @@
 import {ManageProductFormValues, ManageProductRouteProps} from "../../types";
-import {useNavigation} from "@react-navigation/native";
 import {useProductActions, useProductDetails} from "../../store/store.products";
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import {useCurrencyFormatter} from "../../../../shared/hooks/useCurrencyFormatter";
@@ -18,22 +17,13 @@ import ProductAvailabilityToggle from "../../components/ui/ProductAvailabilityTo
 import ModelProductCategory from "../../../../local_database/model/model.productCategory";
 import CategoryCard from "../../components/ui/CategoryCard";
 import {ProductCategoryRepository} from "../../data/category.repository";
-import {ProductRepository} from "../../data/product.repository";
-import {ImageUploadService} from "../../../uploads/services/ImageUploadService";
-import {ProductService} from "../../services/product.service";
+import {productService} from "../../services/product.service";
 
 function ManageProductContent({route}: ManageProductRouteProps) {
     const {productId} = route.params
 
-    const productRepository =new ProductRepository();
-    const imageService=new ImageUploadService()
-    const productService = new ProductService(
-        productRepository,
-        imageService,
-    );
-    const isEditMode = !!productId;
 
-    const navigate = useNavigation();
+    const isEditMode = !!productId;
 
     const {
         getProductById,
@@ -73,7 +63,7 @@ function ManageProductContent({route}: ManageProductRouteProps) {
         if (isEditMode) {
             getProductById(productId);
         }
-    }, [productId]);
+    }, [productId,isEditMode,reset]);
 
 
     useEffect(() => {

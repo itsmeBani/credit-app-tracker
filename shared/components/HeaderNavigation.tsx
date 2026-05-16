@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, useColorScheme, View, Text, Pressable} from "react-native";
+import {Pressable, View} from "react-native";
 import {useNavigation, useTheme} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Title from "./Title";

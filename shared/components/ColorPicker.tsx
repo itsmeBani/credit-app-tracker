@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ScrollView, Pressable, View, Text} from "react-native";
+import {Pressable, ScrollView, Text, View} from "react-native";
 import {COLOR_PALETTE} from "../utils/constant";
 
 type Props = {

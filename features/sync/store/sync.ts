@@ -1,6 +1,6 @@
-import { create } from 'zustand'
+import {create} from 'zustand'
 import {synchronize} from '@nozbe/watermelondb/sync'
-import { localDatabase } from '../../../local_database'
+import {localDatabase} from '../../../local_database'
 import React from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import {appToast} from "../../../shared/components/toast";
@@ -51,7 +51,7 @@ type SyncStore = {
 
                 set({syncState:"success"})
                 appToast.success("successfully synced.", "You're up to date",)
-            } catch (err) {
+            } catch  {
                 set({syncState:"error"})
                 appToast.error("Sync failed", "Please try again",)
             }finally {

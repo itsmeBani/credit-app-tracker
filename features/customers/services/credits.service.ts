@@ -129,3 +129,9 @@ export class CreditsService {
 
 
 }
+
+
+
+export  const creditsRepository = new CreditsRepository()
+export const creditsService = new CreditsService(creditsRepository)
+

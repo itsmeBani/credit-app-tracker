@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity, ActivityIndicator, ViewStyle } from "react-native";
+import {ActivityIndicator, Text, TouchableOpacity, ViewStyle} from "react-native";
 
 type ButtonSize = "sm" | "md" | "lg";
 

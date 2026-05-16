@@ -1,10 +1,7 @@
-import React, { forwardRef } from "react";
-import { View, Text } from "react-native";
-import BottomSheet, {
-    BottomSheetView,
-    BottomSheetBackdrop,
-} from "@gorhom/bottom-sheet";
-import { useTheme } from "@react-navigation/native";
+import React, {forwardRef} from "react";
+import {Text, View} from "react-native";
+import BottomSheet, {BottomSheetBackdrop, BottomSheetView,} from "@gorhom/bottom-sheet";
+import {useTheme} from "@react-navigation/native";
 import IconButton from "./IconButton";
 
 type Props = {

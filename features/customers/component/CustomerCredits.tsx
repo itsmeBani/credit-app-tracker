@@ -6,8 +6,9 @@ import CustomerCreditStatus from "./ui/CustomerCreditStatus";
 import {useNavigation} from "@react-navigation/native";
 import ModelCredit from "../../../local_database/model/model.credits";
 import {withObservables} from "@nozbe/watermelondb/react";
-import CreditsRepository from "../data/credits.repository";
+
 import CreditEmpty from "./ui/empty-state/CreditEmpty";
+import {creditsRepository} from "../services/credits.service";
 
 function CustomerCredits({credits}: { credits: ModelCredit[] }) {
 
@@ -58,7 +59,6 @@ function CustomerCredits({credits}: { credits: ModelCredit[] }) {
     );
 }
 
-const creditsRepository = new CreditsRepository();
 
 const enhance = withObservables(
     ['creditId'],

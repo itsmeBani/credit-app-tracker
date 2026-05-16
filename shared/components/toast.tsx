@@ -1,5 +1,5 @@
-import { toast } from "sonner-native";
-import { View, Text, Pressable } from "react-native";
+import {toast} from "sonner-native";
+import {Pressable, Text, View} from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React from "react";

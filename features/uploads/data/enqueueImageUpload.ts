@@ -1,8 +1,7 @@
-import { Q } from '@nozbe/watermelondb'
-import { localDatabase } from '../../../local_database'
+import {Q} from '@nozbe/watermelondb'
+import {localDatabase} from '../../../local_database'
 import ModelImageUploadQueue from '../../../local_database/model/model.imageUploadQueue'
 import {EnqueueImageUploadParams} from "../types";
-
 
 
 export const enqueueImageUpload = async ({

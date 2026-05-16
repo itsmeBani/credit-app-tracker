@@ -1,6 +1,5 @@
-import {View, Text, useColorScheme} from "react-native";
+import {Text, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
-import {formatNumber} from "../../../../shared/hooks/useCurrencyFormatter";
 import {CustomerCreditStatusProps} from "../../types";
 import {CalendarFold} from "lucide-react-native";
 import {formatDate} from "../../../../shared/utils/formatDate";
@@ -8,7 +7,6 @@ import IconButton from "../../../../shared/components/IconButton";
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {CreditStatusBadge} from "./CreditStatusBadge";
-import {withObservables} from "@nozbe/watermelondb/react";
 import {formatAmount} from "../../../../shared/utils/formatAmount";
 
 function CustomerCreditStatus({
@@ -78,8 +76,5 @@ function CustomerCreditStatus({
     );
 }
 
-// const enhance = withObservables(['credit'], ({credit}) => ({
-//     credit,
-// }))
-// export default enhance(CustomerCreditStatus)
+
 export default CustomerCreditStatus

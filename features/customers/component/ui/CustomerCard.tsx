@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Pressable, useColorScheme} from "react-native";
+import {Pressable, Text, useColorScheme, View} from "react-native";
 
 import {useTheme} from "@react-navigation/native";
 import Entypo from '@expo/vector-icons/Entypo';
@@ -23,11 +23,7 @@ function CustomerCard({data,onClick}:CustomerCardProps) {
             </View>
         </View>
             <View className="justify-center flex-row  gap-7 items-center ">
-              {/*<View>*/}
-              {/*    <Text className=" font-jakarta text-slate-600  dark:text-gray-200 text-xs font-medium ">Balance</Text>*/}
-              {/*    <Text className=" font-jakarta text-md text-slate-600  dark:text-white font-extrabold ">₱1,200</Text>*/}
 
-              {/*</View>*/}
                 <View>
 
                         <Entypo name="chevron-right" size={24} color={theme === "dark" ? "white" : "gray"} />

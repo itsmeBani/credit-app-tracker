@@ -3,8 +3,6 @@ import React, {Suspense, useState} from 'react';
 
 import ProductCategory from "../components/ProductCategory";
 
-import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
-
 
 import Title from "../../../shared/components/Title";
 
@@ -18,7 +16,7 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 import CreateButton from "../components/CreateButton";
 import Search from "../../../shared/components/Search";
-import {SafeAreaView} from "react-native-safe-area-context";
+import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
 
 
 function ProductsContent() {
@@ -29,7 +27,7 @@ function ProductsContent() {
 
     return (
         <GestureHandlerRootView className={"flex-1"}>
-            <SafeAreaView edges={["top"]}  className={"flex-1 px-3 "}>
+            <SafeAreaContainer disablePaddingBottom={true}  >
                 <Title   description={"Create, edit, and organize your products easily."} title={"Manage Product"} align={"center"}/>
 
 
@@ -41,7 +39,7 @@ function ProductsContent() {
                 <CreateButton/>
                 <ProductCategory/>
                 <Products   search={search} />
-            </SafeAreaView>
+            </SafeAreaContainer>
         </GestureHandlerRootView>
 
     );

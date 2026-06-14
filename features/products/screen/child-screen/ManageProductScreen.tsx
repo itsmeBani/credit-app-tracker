@@ -13,15 +13,18 @@ import Input from "../../../../shared/components/Input";
 import Button from "../../../../shared/components/Button";
 import {KeyboardProvider} from "react-native-keyboard-controller";
 import ImagePicker from "../../../../shared/components/ImagePicker";
-import ProductAvailabilityToggle from "../../components/ui/ProductAvailabilityToggle";
+import ProductAvailabilityToggle from "../../components/ui/product/ProductAvailabilityToggle";
 import ModelProductCategory from "../../../../local_database/model/model.productCategory";
-import CategoryCard from "../../components/ui/CategoryCard";
+import CategoryCard from "../../components/ui/category/CategoryCard";
 import {ProductCategoryRepository} from "../../data/category.repository";
 import {productService} from "../../services/product.service";
+import IconButton from "../../../../shared/components/IconButton";
+import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
+import {useNavigation} from "@react-navigation/native";
 
-function ManageProductContent({route}: ManageProductRouteProps) {
+export default function ManageProductScreen({route}: ManageProductRouteProps) {
     const {productId} = route.params
-
+  const navigation=useNavigation()
 
     const isEditMode = !!productId;
 
@@ -108,12 +111,12 @@ function ManageProductContent({route}: ManageProductRouteProps) {
                  reset();
             }
 
-
+        navigation.goBack()
     }
 
 
     return (
-        <SafeAreaView className="flex-1">
+        <SafeAreaContainer className="flex-1">
             <HeaderNavigation
 
                 title={isEditMode ? "Edit Product" : "Create Product"}
@@ -136,7 +139,7 @@ function ManageProductContent({route}: ManageProductRouteProps) {
                     )}
                 />
 
-                <View className="flex gap-3  px-5 mt-4">
+                <View className="flex gap-3 pb-10  px-2 mt-4">
 
 
                     <Controller
@@ -237,28 +240,20 @@ function ManageProductContent({route}: ManageProductRouteProps) {
                            </>
                         )}
                     />
-                    <Button style={{marginTop:10}}
-                        title={
-                            isSubmitting
-                                ? "Saving..."
-                                : isEditMode
-                                    ? "Update Product"
-                                    : "Create Product"
-                        }
-                        onPress={handleSubmit(onSubmit)}
-                    />
+
+
+
                 </View>
+
             </KeyboardAwareContainer>
-        </SafeAreaView>
+            <IconButton onPress={handleSubmit(onSubmit)} label={isSubmitting
+                ? "Saving..."
+                : isEditMode
+                    ? "Update Product"
+                    : "Create Product"} containerClassName={"py-4"}
+            />
+        </SafeAreaContainer>
     );
 }
 
 
-export default function ManageProductScreen(props: ManageProductRouteProps) {
-    return (
-        <Suspense fallback={<Text>Loading product...</Text>}>
-            <KeyboardProvider>
-                <ManageProductContent {...props} />
-    </KeyboardProvider>
-        </Suspense>);
-}

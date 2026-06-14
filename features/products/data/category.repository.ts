@@ -54,4 +54,11 @@ export class ProductCategoryRepository {
     async getProductCategories(): Promise<ModelProductCategory[]> {
         return await this.collection.query().fetch();
     }
+    getObservedProductCategoryCount() {
+        return this.collection.query().observeCount();
+    }
+
+
 }
+
+

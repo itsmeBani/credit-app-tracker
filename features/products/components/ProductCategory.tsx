@@ -1,7 +1,7 @@
 import React from "react";
 import {FlatList, View} from "react-native";
 import {CategoryProps} from "../types";
-import CategoryCard from "./ui/CategoryCard";
+import CategoryCard from "./ui/category/CategoryCard";
 import Title from "../../../shared/components/Title";
 import {useCategories, useCategoryActions} from "../store/store.category";
 import {withObservables} from "@nozbe/watermelondb/react";
@@ -29,7 +29,7 @@ function ProductCategory({ categories}: CategoryProps) {
                 horizontal
                 overScrollMode={"never"}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{paddingTop:10,gap:13 }}
+                contentContainerStyle={{paddingTop:10,paddingBottom:10,gap:13 }}
                 renderItem={({ item }) => {
 
                     return (

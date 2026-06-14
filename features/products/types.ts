@@ -8,10 +8,15 @@ import {manageCategorySchema} from "./schema_validation/category";
 
 export type ProductsProps = {
     products: ModelProducts[];
+    layout:{
+            layout:"GRID"
+            col:2
+        } |  {
+            layout:"ROW"
+                col:1
+             }
+}
 
-};
-
-export type GridItem = | ModelProducts | { id: string; empty: true };
 
 
 export type CategoryProps = {

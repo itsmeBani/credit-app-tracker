@@ -70,13 +70,16 @@ function Customers({ customers }: CustomersProps) {
         lastname: string,
         firstname: string
     ) => {
-        navigation.navigate("Main", {
-            screen: "CustomerCredit",
-            params: {
-                id,
-                lastname,
-                firstname,
-            },
+        navigation.navigate("Authenticated", {
+           screen : "Customers",
+            params:{
+                screen: "CustomerCredit",
+                params: {
+                    id,
+                    lastname,
+                    firstname,
+                },
+            }
         });
     };
 
@@ -94,15 +97,15 @@ function Customers({ customers }: CustomersProps) {
                 }}
                 keyExtractor={({ id }) => id.toString()}
                 renderItem={({ item }) => (
-                    <ReanimatedSwipeable
-                        friction={1.5}
-                        overshootRight={false}
-                        rightThreshold={40}
-                        renderRightActions={RightAction}
-                        containerStyle={{
-                            overflow: "hidden",
-                        }}
-                    >
+                    // <ReanimatedSwipeable
+                    //     friction={1.5}
+                    //     overshootRight={false}
+                    //     rightThreshold={40}
+                    //     renderRightActions={RightAction}
+                    //     containerStyle={{
+                    //         overflow: "hidden",
+                    //     }}
+                    // >
                         <CustomerCard
                             data={item}
                             onClick={() =>
@@ -113,7 +116,7 @@ function Customers({ customers }: CustomersProps) {
                                 )
                             }
                         />
-                    </ReanimatedSwipeable>
+                    // </ReanimatedSwipeable>
                 )}
             />
         </View>

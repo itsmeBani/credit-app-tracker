@@ -1,7 +1,10 @@
-import React, {forwardRef} from "react";
-import {Text, View} from "react-native";
-import BottomSheet, {BottomSheetBackdrop, BottomSheetView,} from "@gorhom/bottom-sheet";
-import {useTheme} from "@react-navigation/native";
+import React, { forwardRef } from "react";
+import { Text, View } from "react-native";
+import BottomSheet, {
+    BottomSheetBackdrop,
+    BottomSheetView,
+} from "@gorhom/bottom-sheet";
+import { useTheme } from "@react-navigation/native";
 import IconButton from "./IconButton";
 
 type Props = {
@@ -29,21 +32,34 @@ const ActionBottomSheet = forwardRef<BottomSheet, Props>(
     ) => {
         const { colors } = useTheme();
 
+
+        const renderBackdrop =
+            (props: any) =>
+                <BottomSheetBackdrop
+                    {...props}
+                    appearsOnIndex={0}
+                    disappearsOnIndex={-1}
+                    opacity={0.4}
+                    pressBehavior="close"
+                />
+
+
         return (
             <BottomSheet
                 ref={ref}
                 index={-1}
                 snapPoints={["25%"]}
+                detached={true}
+
                 enablePanDownToClose
-                backdropComponent={(props) => (
-                    <BottomSheetBackdrop
-                        {...props}
-                        appearsOnIndex={0}
-                        disappearsOnIndex={-1}
-                        opacity={0.5}
-                        pressBehavior="close"
-                    />
-                )}
+
+                backdropComponent={(props)=> <BottomSheetBackdrop
+                    {...props}
+                    appearsOnIndex={0}
+                    disappearsOnIndex={-1}
+                    opacity={0.4}
+                    pressBehavior="close"
+                />}
                 handleIndicatorStyle={{ backgroundColor: "white" }}
                 backgroundStyle={{ backgroundColor: colors.card }}
                 style={{
@@ -58,7 +74,6 @@ const ActionBottomSheet = forwardRef<BottomSheet, Props>(
                 <BottomSheetView>
                     <View className="px-5 py-4 flex gap-5">
 
-                        {/* Header */}
                         <View className="flex flex-row gap-3 items-center">
                             {icon && (
                                 <View className="w-10 h-10 rounded-lg border border-blue-500 items-center justify-center">
@@ -79,7 +94,6 @@ const ActionBottomSheet = forwardRef<BottomSheet, Props>(
                             </View>
                         </View>
 
-                        {/* Actions */}
                         <View className="flex flex-row gap-3">
                             <View className="flex-1">
                                 <IconButton
@@ -101,7 +115,6 @@ const ActionBottomSheet = forwardRef<BottomSheet, Props>(
                 </BottomSheetView>
             </BottomSheet>
         );
-    }
-);
+    });
 
 export default ActionBottomSheet;

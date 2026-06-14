@@ -39,4 +39,7 @@ export class CustomersRepository {
                 "_status",
             ]);
     }
+    getObservedCustomerCount() {
+        return this.collection.query().observeCount();
+    }
 }

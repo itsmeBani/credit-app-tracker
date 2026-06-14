@@ -74,6 +74,7 @@ function CreateCategoryScreen() {
                       render={({ field: { value, onChange } }) => (
                           <Input
                               label="Category Name"
+                              placeholder="e.g. Utilities"
                               value={value}
                               onChangeText={onChange}
                               error={errors.name?.message}
@@ -88,7 +89,8 @@ function CreateCategoryScreen() {
                       render={({ field: { value, onChange } }) => (
                           <Input
                               label="Description"
-                              value={value}
+                              placeholder="Describe this category"
+                               value={value}
                               onChangeText={onChange}
                               error={errors.description?.message}
                           />

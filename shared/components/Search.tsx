@@ -21,7 +21,7 @@ export default function Search({
     return (
         <View className="py-2 pt-4">
             <View
-                className={`flex-row items-center rounded-full px-4 
+                className={`flex-row items-center rounded-full bg-white  dark:bg-[#272727] px-4 
       ${isFocused ? " border border-blue-300" : " border border-gray-200 dark:border-gray-100/50"}
       shadow-xs`}
             >

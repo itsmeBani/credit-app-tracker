@@ -20,11 +20,12 @@ const AppKeyboardAwareContainer = forwardRef<any, Props>(
         return (
             <KeyboardAwareScrollView
                 ref={ref}
-                keyboardShouldPersistTaps="handled"
+                keyboardShouldPersistTaps="never"
                 contentContainerClassName={contentContainerClassName}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{flexGrow:1}}
                 bottomOffset={bottomOffset}
+                keyboardDismissMode={"on-drag"}
                 {...props}
             >
                 {children}

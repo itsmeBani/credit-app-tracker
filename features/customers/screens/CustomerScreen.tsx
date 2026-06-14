@@ -15,13 +15,7 @@ function CustomerScreen() {
       const [search,setSearch]=useState("")
 
       const debounceSearch=useDebounce(search,500)
-     const navigation=useNavigation()
 
-    const navigateCustomerCreditScreen=()=>{
-        navigation.navigate('Main', {
-            screen: 'CreateCustomer',
-        })
-    }
       return (
           <SafeAreaContainer disablePaddingBottom={true}  >
               <View className="  w-full  pb-3">
@@ -29,16 +23,8 @@ function CustomerScreen() {
                   <Search
                       value={search}
                       onChangeText={setSearch}
-                      placeholder="Search products..."
+                      placeholder="Find a customer"
                   />
-                  <View className="flex py-2 w-full flex-row  gap-2">
-                     <IconButton onPress={navigateCustomerCreditScreen}
-
-                         icon={<AntDesign name="plus" size={15} color="white" />}
-                         label={"Customer"}
-                     />
-                 </View>
-
               </View>
               <Customers  search={debounceSearch}  />
           </SafeAreaContainer>

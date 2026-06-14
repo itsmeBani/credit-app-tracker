@@ -64,4 +64,7 @@ export class ProductRepository {
             )
 
     }
+        getObservedProductCount() {
+        return this.collection.query().observeCount();
+    }
 }

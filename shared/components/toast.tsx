@@ -4,6 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import LottieView from "lottie-react-native";
 
 const base =
     "px-6 py-4 rounded-xl shadow-md flex-row items-center w-[90%]  gap-3";
@@ -13,10 +14,11 @@ const textTitle = "font-jakarta font-bold dark:text-white  text-xs flex-1";
 const textDescription = "font-jakarta text-xs dark:text-white flex-1  ";
 const buttonBase = " text-xs text-xs dark:text-white";
 
+
 export const appToast = {
     success: (msg: string ,title = "Changes Saved" ) =>
         toast.custom(
-            <View style={{ width: "100%", alignItems: "center" }}>
+            <View style={{ width: "100%", alignItems: "center",position:"relative" }} >
                 <View className={`${base} bg-white  dark:bg-[#212121]   py-5 flex flex-row justify-between   self-center`} style={{elevation :2}}>
                <View className="flex flex-row gap-4 items-center justify-center">
                    <View
@@ -37,6 +39,24 @@ export const appToast = {
                         <Text className={buttonBase}>Dismiss</Text>
                     </Pressable>
                 </View>
+
+                <View className={"absolute w-full h-full"} style={{zIndex:1,top:20}} pointerEvents={"none"}>
+                    <LottieView
+
+                        loop={false}
+                        resizeMode={"cover"}
+                        autoPlay={true}
+                        speed={1}
+                        source={require("../../assets/lottie/splash.json")}
+                        style={{
+                            height: "100%",
+                            width: "100%",
+
+
+                        }}
+                    />
+                </View>
+
             </View>
         ),
 

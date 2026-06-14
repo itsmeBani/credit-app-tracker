@@ -31,7 +31,7 @@ function HeaderNavigation({
             </Pressable>
 
 
-            <View  className=" -2 items-center">
+            <View  className="  items-center">
                 <Title title={title} description={description}/>
             </View>
 

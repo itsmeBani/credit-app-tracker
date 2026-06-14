@@ -26,10 +26,9 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.jiovani.creditapp"
     },
@@ -42,7 +41,6 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos",
-
           "colors": {
             "cropToolbarColor": "#ffffff"
           }
@@ -65,9 +63,9 @@
             "./assets/fonts/PlusJakartaSans-SemiBold.ttf",
             "./assets/fonts/PlusJakartaSans-Light.ttf",
             "./assets/fonts/PlusJakartaSans-Regular.ttf",
-            "./assets/fonts/Barlow-ExtraBoldItalic.ttf"
+            "./assets/fonts/Barlow-ExtraBoldItalic.ttf",
+            "./assets/fonts/number.ttf"
           ],
-
           "android": {
             "fonts": [
               {
@@ -104,20 +102,25 @@
                 "fontFamily": "Barlow",
                 "fontDefinitions": [
                   {
-                    "path": "./assets/fonts/Barlow-ExtraBoldItalic.ttf",
-                    "weight": 800,
-                    "style": "italic"
+                    "path": "./assets/fonts/Barlow-Black.ttf",
+                    "weight": 300
+                  }
+                ]
+              },
+              {
+                "fontFamily": "Number",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/number.ttf",
+                    "weight": 800
                   }
                 ]
               }
             ]
           }
         }
-
-
-
-      ]
-
+      ],
+      "patch-project"
     ],
     "extra": {
       "eas": {

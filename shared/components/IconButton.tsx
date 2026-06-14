@@ -21,7 +21,7 @@ function IconButton({
                         label = "Title",
                         onPress,
                         icon,
-                        disabled,
+                        disabled=false,
 
                         variant = "primary",
                         containerClassName = "",
@@ -37,6 +37,18 @@ function IconButton({
         primary: {
             container: {
                 backgroundColor: colors.primary,
+
+                // iOS shadow
+                shadowColor: "#1d4ed8",
+                shadowOffset: {
+                    width: 0,
+                    height: isDark ? 2 : 6,
+                },
+                shadowOpacity: isDark ? 0.15 : 0.3,
+                shadowRadius: isDark ? 4 : 8,
+
+                // Android shadow
+                elevation: isDark ? 3 : 4,
             },
             text: {
                 color: "#fff",
@@ -80,17 +92,7 @@ function IconButton({
                 ...current.container,
 
                 shadowColor: colors.primary,
-                shadowOffset: {
-                    width: 0,
-                    height: 2,
-                },
-                shadowOpacity: variant === "primary" ? 0.35 : 0,
-                shadowRadius: 5,
 
-                // Android shadow
-                elevation: variant === "primary" ? 4 : 0,
-
-                opacity: disabled ? 0.6 : 1,
             }}
             className={`py-2 px-4 rounded-full flex-row items-center justify-center gap-2 ${containerClassName}`}
             {...rest}

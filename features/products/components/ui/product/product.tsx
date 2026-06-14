@@ -1,36 +1,16 @@
-import {Pressable, Text, View} from "react-native";
+import {Pressable, Text, useColorScheme, View} from "react-native";
 import {Minus, Plus} from "lucide-react-native";
 import {Image} from "expo-image";
 import React from "react";
 import {formatAmount} from "../../../../../shared/utils/formatAmount";
 import {useTheme} from "@react-navigation/native";
+import {ProductCardActionProps, ProductCardProps, ProductCardSelectProps} from "./types";
+import {useItemSelectionActions} from "../../../../customers_credit/credit_items/store/itemSelectionStore";
 
 
 const baseStyle = " p-2 flex-1 border flex flex-row justify-between border-slate-500/10 rounded-md"
 
-
-interface ProductCardProps {
-    image: string
-    description: string
-    name: string
-    price: string
-    onPress?: () => void
-}
-
-interface ProductCardSelectProps extends ProductCardProps {
-    isSelected: boolean
-
-}
-
-interface ProductCardActionProps extends ProductCardProps {
-    incrementQuantity: () => void
-    decrementQuantity: () => void
-    quantity:number
-    subTotal:number
-}
-
-export const ProductCardSelect = ({onPress, image, name, description, price, isSelected}: ProductCardSelectProps) => {
-
+export const ProductCardSelect = ({onPress, image, name, description,isSelected, price,id}: ProductCardSelectProps) => {
 
     return (
         <Pressable onPress={onPress}
@@ -71,14 +51,42 @@ export const ProductCardSelect = ({onPress, image, name, description, price, isS
     )
 }
 
-export const ProductCard = () => {
+export const ProductCard = ({image,price,name,description, onPress,horizontal=false}:ProductCardProps) => {
 
+    const { colors } = useTheme();
+    const theme=useColorScheme()
 
+  const baseStyle=horizontal ? "flex-row":"flex-col"
+
+    const imageStyle=horizontal ? 50 : "auto"
     return (
-        <View className={baseStyle}>
+        <Pressable onPress={onPress} style={{backgroundColor:colors.card,height:horizontal ? 90 : "auto"}}  className="flex flex-row  items-center justify-between flex-1  p-3    shadow  rounded-lg">
+
+            <View className={`flex-1  rounded-lg flex-row  gap-4 ${baseStyle}`}>
+                <View  style={{width:imageStyle,height:imageStyle}}  className=" aspect-square">
 
 
-        </View>
+                    <Image cachePolicy={"memory-disk"}
+                           source={image}
+                           contentPosition={"center"}
+                           contentFit={"contain"}
+                           className="w-full h-full" style={{flex:1}}
+                    />
+
+                </View>
+                <View className="flex-1 ">
+                    <View className={"justify-center"}>
+                        <Text numberOfLines={1} style={{color:colors.text,opacity:0.7, fontFamily:"PlusJakartaSans"}} className={" font-bold text-sm leading-2"}>{name}</Text>
+                        { description  && <Text numberOfLines={1} style={{color:colors.text, fontFamily:"PlusJakartaSans"}} className={" font-normal text-xs leading-2"}>{description}</Text>}
+                        <Text style={{color:theme === "dark" ? colors.text :colors.primary, fontFamily:"PlusJakartaSans"}} className={"font-bold  mt-1  text-md"}>{formatAmount(price)}</Text>
+
+
+                    </View>
+
+                </View>
+
+            </View>
+        </Pressable>
     )
 }
 
@@ -121,7 +129,7 @@ export const ProductCardAction = ({onPress, image, name, description, price,decr
                 </View>
 
             </View>
-            <View className="pr-5 items-end">
+            <View className="pr-3 pt-3 items-end">
 
                 <Text className="font-jakarta text-blue-600 dark:text-white font-extrabold text-lg">{formatAmount(subTotal)}</Text>
                 <Text className="font-jakarta text-xs font-medium text-slate-600  bg-gray-100 dark:bg-gray-100/10 px-3 font-semibold py-1 rounded-full dark:text-gray-200   ">{quantity}X</Text>

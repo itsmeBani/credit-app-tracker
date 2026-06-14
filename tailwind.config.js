@@ -14,6 +14,7 @@ module.exports = {
                 jakarta: ["PlusJakartaSans"],
                 jakartaBold: ["PlusJakartaSans"], // use weight instead
                 barlow: ["Barlow"],
+                number:["Number"]
             },
         },
     },

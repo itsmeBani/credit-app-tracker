@@ -20,8 +20,8 @@ export const DarkCustomTheme = {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
-        background: "#292929",
-        card:"#212121",
+        background: "#191919",
+        card:"#272727",
         text:"#FFFFFF",
 
     },

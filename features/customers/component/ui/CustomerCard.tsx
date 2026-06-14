@@ -12,9 +12,9 @@ function CustomerCard({data,onClick}:CustomerCardProps) {
     const theme=useColorScheme()
     const initials = `${data?.firstname?.charAt(0) ?? ""}${data?.lastname?.charAt(0) ?? ""}`;
     return (
-        <Pressable onPress={onClick}   style={{backgroundColor:colors.card,elevation:1}}  className="w-full  rounded-lg shadow-md flex-row   gap-2 p-2 h-[70px] ">
+        <Pressable onPress={onClick}   style={{backgroundColor:colors.card}}  className="w-full  rounded-lg shadow-md flex-row   gap-2 p-2 h-[70px] ">
         <View className="flex flex-1 flex-row p-2 gap-3">
-            <View className="bg-blue-200/50 dark:bg-[#292929] items-center justify-center rounded-xl  aspect-square">
+            <View className="bg-blue-200/50 dark:bg-[#191919] items-center justify-center rounded-xl  aspect-square">
                 <Text  className="text-lg font-jakarta dark:text-white  text-blue-500 font-bold">{initials}</Text>
             </View>
             <View className=" justify-center  flex-1 gap-1">

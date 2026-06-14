@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense} from 'react';
 
 
 import ProductCategory from "../components/ProductCategory";
@@ -12,33 +12,34 @@ import Products from "../components/Products";
 
 
 import {GestureHandlerRootView} from "react-native-gesture-handler";
-
-
-import CreateButton from "../components/CreateButton";
-import Search from "../../../shared/components/Search";
 import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
+import SearchTrigger from "../../../shared/components/SearchBarTrigger";
+import {useNavigation} from "@react-navigation/native";
+import {productRepository} from "../services/product.service";
 
 
 function ProductsContent() {
 
+const navigation=useNavigation()
 
-   const  [search,setSearch]=useState("")
-
+    const navigateSearchScreen=()=>{
+    navigation.navigate("Authenticated",{
+        screen:"Tabs",
+        params:{
+            screen:"Search"
+        }
+    })
+    }
 
     return (
         <GestureHandlerRootView className={"flex-1"}>
             <SafeAreaContainer disablePaddingBottom={true}  >
                 <Title   description={"Create, edit, and organize your products easily."} title={"Manage Product"} align={"center"}/>
 
+                <SearchTrigger placeholder={"Find products"} onPress={navigateSearchScreen}/>
 
-                <Search
-                    value={search}
-                    onChangeText={setSearch}
-                    placeholder="Search products..."
-                />
-                <CreateButton/>
                 <ProductCategory/>
-                <Products   search={search} />
+                <Products  search={""}  />
             </SafeAreaContainer>
         </GestureHandlerRootView>
 

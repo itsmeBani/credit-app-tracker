@@ -1,69 +1,118 @@
-import React from "react";
-import {ActivityIndicator, Text, TouchableOpacity, ViewStyle} from "react-native";
+import React from 'react';
+import {Pressable, PressableProps, Text, useColorScheme, View} from "react-native";
+import {useTheme} from "@react-navigation/native";
+import Feather from '@expo/vector-icons/Feather';
 
-type ButtonSize = "sm" | "md" | "lg";
+type Variant = "primary" | "outline" | "ghost";
 
-type ButtonProps = {
-    title: string;
-    onPress?: () => void;
-    loading?: boolean;
+type IconButtonProps = PressableProps & {
+    label?: string;
+    icon?: React.ReactNode;
     disabled?: boolean;
-    className?: string;
+    variant?: Variant;
+
+    containerClassName?: string;
     textClassName?: string;
-    style?: ViewStyle;
-    fullWidth?: boolean;
-    size?: ButtonSize;
+    iconClassName?: string;
+
 };
 
-const sizeStyles: Record<ButtonSize, string> = {
-    sm: "px-3 py-2 text-sm",
-    md: "px-5 py-3 text-base",
-    lg: "px-6 py-4 text-lg",
-};
+function Button({
+                        label = "Title",
+                        onPress,
+                        icon,
+                        disabled=false,
 
-export default function Button({
-                                   title,
-                                   onPress,
-                                   loading = false,
-                                   disabled = false,
-                                   className = "",
-                                   textClassName = "",
-                                   style,
-                                   fullWidth = false,
-                                   size = "md",
-                               }: ButtonProps) {
-    const isDisabled = disabled || loading;
+                        variant = "primary",
+                        containerClassName = "",
+                        textClassName = "",
+                        iconClassName = "",
+                        ...rest
+                    }: IconButtonProps) {
+
+    const { colors } = useTheme();
+    const theme =useColorScheme()
+    const isDark=theme === "dark"
+    const variants = {
+        primary: {
+            container: {
+                backgroundColor: colors.primary,
+
+                // iOS shadow
+                shadowColor: "#1d4ed8",
+                shadowOffset: {
+                    width: 0,
+                    height: isDark ? 2 : 6,
+                },
+                shadowOpacity: isDark ? 0.15 : 0.3,
+                shadowRadius: isDark ? 4 : 8,
+
+                // Android shadow
+                elevation: isDark ? 3 : 4,
+            },
+            text: {
+                color: "#fff",
+            },
+        },
+
+        outline: {
+            container: {
+                backgroundColor: "transparent",
+                borderWidth: 1,
+                borderColor:isDark ? "rgba(255,255,255,0.47)" : colors.primary,
+            },
+            text: {
+                color:isDark ? "#FFFFFF" : colors.primary,
+            },
+        },
+
+        ghost: {
+            container: {
+                backgroundColor: "transparent",
+            },
+            text: {
+                color: colors.primary,
+            },
+        },
+    } satisfies Record<
+        Variant,
+        {
+            container: object;
+            text: object;
+        }
+    >;
+
+    const current = variants[variant];
 
     return (
-        <TouchableOpacity
+        <Pressable
             onPress={onPress}
-            disabled={isDisabled}
-            style={style}
-            className={`
-                flex flex-row items-center justify-center
-                rounded-full
-                bg-blue-500
-                shadow-2xl
-                active:opacity-80
-                ${sizeStyles[size]}
-                ${fullWidth && "w-full" }
-                ${isDisabled ? "opacity-50" : ""}
-                ${className}
-            `}
+            disabled={disabled}
+            style={{
+                ...current.container,
+
+                shadowColor: colors.primary,
+
+            }}
+            className={`py-2 px-4 rounded-full flex-row items-center justify-center gap-2 ${containerClassName}`}
+            {...rest}
         >
-            {loading ? (
-                <ActivityIndicator color="white" />
-            ) : (
+            {icon && (
+                <View className={iconClassName}>
+                    {disabled ? <Feather name="loader" size={20} color="white" className="animate-spin" />:   icon}
+                </View>
+            )}
+
+            {label && (
                 <Text
-                    style={{ fontFamily: "PlusJakartaSans" }}
-                    className={`
-                        text-white font-semibold
-                        ${textClassName}
-                    `}
+                    style={current.text}
+                    className={`font-jakarta font-semibold text-sm ${textClassName}`}
                 >
-                    {title}
+                    {label}
                 </Text>
             )}
-        </TouchableOpacity>
+        </Pressable>
     );
 }
+
+export default Button;

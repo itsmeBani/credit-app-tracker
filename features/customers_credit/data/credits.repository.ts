@@ -48,20 +48,22 @@ export class CreditsRepository {
             });
     }
 
+
     async updateCreditTotalAmount (amount:number,credit:ModelCredit){
-        await credit.update((record) => {
+     return   await credit.update((record) => {
             record.totalAmount = amount
             record.updatedAt = Date.now()
 
 
         })
     }
-    async updateCreditPaidAmount (amount:number,credit:ModelCredit,status:CreditStatus){
+    async updateCreditPaidAmount (amount:number,credit:ModelCredit){
 
         return await credit.update((record) => {
             record.paidAmount = amount
             record.updatedAt = Date.now()
-            record.status =status
+
+
         })
     }
 
@@ -100,6 +102,7 @@ export class CreditsRepository {
     async getCreditById(id:string){
      return  await this.creditsCollection.find(id)
     }
+
     getObserveCreditById(id:string){
         return   this.creditsCollection.findAndObserve(id)
     }
@@ -107,10 +110,28 @@ export class CreditsRepository {
                 return this.creditItemsCollection.query(
                     Q.where("credit_id",id)).observeCount()
     }
+
     getObservedCreditCount() {
         return this.creditsCollection.query().observeCount();
     }
 
+    getActiveCreditDebts() {
+        return this.creditsCollection
+            .query(
+                Q.where("status", Q.oneOf(["UNPAID", "PARTIAL"]))
+            )
+            .observeWithColumns([
+                "total_amount",
+                "paid_amount",
+            ]);
+    }
+
+
+    async updateCreditStatus(credit:ModelCredit,status:CreditStatus){
+        return await credit.update((record) => {
+            record.status =status
+        })
+    }
 
 
 

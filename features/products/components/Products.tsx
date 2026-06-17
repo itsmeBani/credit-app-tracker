@@ -18,7 +18,7 @@ function Products({
                   }: ProductsProps) {
 
     const navigation = useNavigation()
-    console.log("rerender 1")
+
     const navigateManageProduct = (id: string) => {
         navigation.navigate('Authenticated', {
             screen: "Products",
@@ -40,7 +40,7 @@ function Products({
                 numColumns={layout.col}
                 showsVerticalScrollIndicator={false}
                 masonry={true}
-                contentContainerStyle={{paddingBottom: 20, gap: 8}}
+                contentContainerStyle={{ gap: 8}}
                 contentContainerClassName={"gap-2 pb-20"}
                 renderItem={({item}) => {
                     return       <EnhancedItem onPress={()=>navigateManageProduct(item.id)} product={item} layout={layout.layout === "ROW"} />

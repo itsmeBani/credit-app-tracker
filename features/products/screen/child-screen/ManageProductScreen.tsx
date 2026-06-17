@@ -18,7 +18,7 @@ import ModelProductCategory from "../../../../local_database/model/model.product
 import CategoryCard from "../../components/ui/category/CategoryCard";
 import {ProductCategoryRepository} from "../../data/category.repository";
 import {productService} from "../../services/product.service";
-import IconButton from "../../../../shared/components/IconButton";
+
 import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
 import {useNavigation} from "@react-navigation/native";
 
@@ -108,10 +108,10 @@ export default function ManageProductScreen({route}: ManageProductRouteProps) {
 
             } else {
                await productService.createProduct(data);
-                 reset();
+                 // reset();
             }
 
-        navigation.goBack()
+        // navigation.goBack()
     }
 
 
@@ -237,6 +237,11 @@ export default function ManageProductScreen({route}: ManageProductRouteProps) {
                                        );
                                    }}
                                />
+
+                               {errors.categoryId?.message &&
+                                   <Text
+                                   style={{ color: "#fd4949" }}
+                                   className="font-jakarta text-xs mt-1">{errors.categoryId?.message}</Text>}
                            </>
                         )}
                     />
@@ -246,7 +251,7 @@ export default function ManageProductScreen({route}: ManageProductRouteProps) {
                 </View>
 
             </KeyboardAwareContainer>
-            <IconButton onPress={handleSubmit(onSubmit)} label={isSubmitting
+            <Button onPress={handleSubmit(onSubmit)} disabled={isSubmitting} label={isSubmitting
                 ? "Saving..."
                 : isEditMode
                     ? "Update Product"

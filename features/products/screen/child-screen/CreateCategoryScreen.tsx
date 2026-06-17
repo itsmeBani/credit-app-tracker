@@ -107,7 +107,7 @@ function CreateCategoryScreen() {
                         )}
                     />
 
-                  <Button   title="Save Category" onPress={handleSubmit(onSubmit)} />
+                  <Button containerClassName={"py-4"}   label="Save Category" onPress={handleSubmit(onSubmit)} />
 
               </View>
             </KeyboardAwareContainer>

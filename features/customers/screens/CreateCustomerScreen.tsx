@@ -5,7 +5,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 import HeaderNavigation from "../../../shared/components/HeaderNavigation";
 import Input from "../../../shared/components/Input";
-import Button from "../../../shared/components/Button";
+
 import {useNavigation} from "@react-navigation/native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import KeyboardAwareContainer from "../../../shared/components/KeyboardAwareContainer";
@@ -14,7 +14,7 @@ import KeyboardAwareContainer from "../../../shared/components/KeyboardAwareCont
 import {manageCustomerSchema} from "../schema_validation/customer";
 import {ManageCustomerFormValues} from "../types";
 import {customersService} from "../services/customers.service";
-import IconButton from "../../../shared/components/IconButton";
+import Button from "../../../shared/components/Button";
 
 
 function CreateCustomerScreen() {
@@ -83,8 +83,8 @@ function CreateCustomerScreen() {
                         )}
                     />
 
-                    {/* Submit */}
-                    <IconButton containerClassName={"py-3"}
+
+                    <Button containerClassName={"py-3"}
                         label="Save Customer"
                         onPress={handleSubmit(onSubmit)}
                     />

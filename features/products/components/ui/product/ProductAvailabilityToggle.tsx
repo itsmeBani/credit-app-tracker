@@ -29,13 +29,13 @@ function ProductAvailabilityToggle({
     }) => {
 
 
-        const activeBaseClass = value === staticValue ? `${activeColor.bg} ${activeColor.border} dark:bg-transparent` : "border-slate-300"
+        const activeBaseClass = value === staticValue ? `${activeColor.bg} ${activeColor.border} dark:bg-[#212121]` : "bg-white dark:bg-[#212121] border-slate-300"
         const activeTextColor = value === staticValue ? `${activeColor.text}` : "text-slate-400 dark:text-slate-300"
         const activeBorderColor = value === staticValue ? `${activeColor.border}` : "border-slate-300"
 
         return <Pressable
             onPress={() => onChange(staticValue)}
-            className={`${activeBaseClass} flex-row w-auto items-center  shadow-md gap-2 px-3 py-3 rounded-lg border`}
+            className={`${activeBaseClass} flex-row w-auto items-center  shadow-sm gap-2 px-3 py-3 rounded-lg border`}
         >
             <View
                 className={`${activeBorderColor} w-5 h-5 rounded-full border-2 items-center justify-center`}

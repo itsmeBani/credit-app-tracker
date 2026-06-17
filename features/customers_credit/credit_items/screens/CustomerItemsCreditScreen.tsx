@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {View} from "react-native";
-import IconButton from "../../../../shared/components/IconButton";
+
 import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -10,19 +10,21 @@ import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContain
 import CustomerItemsCredit from "../components/CustomerItemsCredit";
 import ItemsTotalCard from "../components/ItemsTotalCard";
 import {CustomerItemsCreditParams} from "../types";
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
+import Button from "../../../../shared/components/Button";
 
 function CustomerItemsCreditScreen({
                                        route,
                                    }: CustomerItemsCreditParams) {
     const {creditId} = route.params;
 
-    const modalRef = useRef<CreateItemCreditModalRef>(null);
+    const modalRef = useRef<BottomSheetModal>(null);
 
     if (!creditId) return null;
 
 
     const openCreateItemModal=()=>{
-        modalRef.current?.open()
+        modalRef.current?.present()
     }
     return (
         <SafeAreaContainer horizontalPadding={0} >
@@ -31,7 +33,7 @@ function CustomerItemsCreditScreen({
 
 
                 <View className="flex-row py-2 gap-2">
-                    <IconButton
+                    <Button
                         icon={
                             <AntDesign
                                 name="plus"

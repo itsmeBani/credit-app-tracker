@@ -36,7 +36,7 @@ function QuickActions() {
     }
     return (
         <View className={"py-4 flex-1 "}>
-            <Text className={"font-jakarta text-slate-700 pb-3 text-sm font-bold"}>
+            <Text className={"font-jakarta text-slate-700 dark:text-gray-200 pb-3 text-sm font-bold"}>
                 Quick Actions
             </Text>
 

@@ -43,7 +43,7 @@ function MetricCard({
         <View
             style={{
                 backgroundColor:colors.card,
-                elevation: 0.8,
+                elevation: 0.5,
             }}
             className="flex-1 rounded-lg items-start p-4 w-full h-full"
         >
@@ -57,7 +57,7 @@ function MetricCard({
             >
                 <MaterialCommunityIcons
                     name={icon}
-                    size={20}
+                    size={18}
                     color={iconColor}
                 />
                 <Text

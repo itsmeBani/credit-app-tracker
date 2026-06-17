@@ -68,7 +68,7 @@ function ActionCard({
 
                 <Text
                     style={{ fontSize: 9 }}
-                    className="text-center font-jakarta font-semibold"
+                    className="text-center text-slate-700 dark:text-gray-200 font-jakarta font-semibold"
                 >
                     {title}
                 </Text>

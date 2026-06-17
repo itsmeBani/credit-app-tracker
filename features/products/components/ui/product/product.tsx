@@ -60,7 +60,7 @@ export const ProductCard = ({image,price,name,description, onPress,horizontal=fa
 
     const imageStyle=horizontal ? 50 : "auto"
     return (
-        <Pressable onPress={onPress} style={{backgroundColor:colors.card,height:horizontal ? 90 : "auto"}}  className="flex flex-row  items-center justify-between flex-1  p-3    shadow  rounded-lg">
+        <Pressable onPress={onPress} style={{backgroundColor:colors.card,height:horizontal ? 90 : "auto"}}  className="flex flex-row  items-center justify-between flex-1  p-3    shadow-sm  rounded-lg">
 
             <View className={`flex-1  rounded-lg flex-row  gap-4 ${baseStyle}`}>
                 <View  style={{width:imageStyle,height:imageStyle}}  className=" aspect-square">

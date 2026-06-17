@@ -71,7 +71,6 @@ export function CustomTabBar({
                              className={"text-center  text-xs font-semibold font-jakarta"}>{route.name}</Text>
             }}
 
-
         />
     );
 }

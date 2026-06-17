@@ -4,6 +4,7 @@ import { TCreatePayment } from "../types";
 import {toast} from "sonner-native";
 import {appToast} from "../../../shared/components/toast";
 import { paymentService } from "../services/payment";
+import {formatAmount} from "../../../shared/utils/formatAmount";
 
 export function usePaymentService() {
     const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ export function usePaymentService() {
             const paymentResult =await paymentService.processOutstandingBalance(payload);
 
             if (paymentResult){
-                appToast.success(`Paid ₱${payload.amount}` , "Payment successfully");
+                appToast.success(`Paid ${formatAmount(payload.amount)}` , "Payment successfully");
             }else {
                 setError("Failed to process payment");
             }

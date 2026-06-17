@@ -1,4 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import ModelCredit from "../../local_database/model/model.credits";
 
 
 export  interface ActionCardProps
@@ -17,5 +18,6 @@ export interface IMetric{
     customersCount:number
     productsCount:number
     productCategoriesCount:number
-    creditCount:number
+    creditCount:number,
+    credit:ModelCredit[]
 }

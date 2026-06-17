@@ -1,14 +1,16 @@
-import CreditsRepository, {creditRepository} from "../../customers_credit/data/credits.repository";
+import {creditRepository, CreditsRepository} from "../../customers_credit/data/credits.repository";
 import {paymentRepository, PaymentsRepository} from "../data/payment.repository";
 import {TCreatePayment} from "../types";
 import {localDatabase} from "../../../local_database";
 import {CreditStatus} from "../../../local_database/types";
 import {appToast} from "../../../shared/components/toast";
+import {creditsService, CreditsService} from "../../customers_credit/services/credits.service";
 
 class PaymentService {
     constructor(
         private creditRepository: CreditsRepository,
-        private paymentsRepository: PaymentsRepository
+        private paymentsRepository: PaymentsRepository,
+        private creditsService:CreditsService
     ) {
     }
 
@@ -30,9 +32,12 @@ class PaymentService {
 
                  const totalPaid=await this.paymentsRepository.getTotalPaidByCreditId(payload.creditId)
 
-                const paymentStatus=this.checkPaymentStatus(totalPaid, credit.totalAmount)
+                const updatedCredit=await this.creditRepository.updateCreditPaidAmount(totalPaid, credit)
 
-                return await this.creditRepository.updateCreditPaidAmount(totalPaid, credit, paymentStatus)
+                const status=this.creditsService.checkCreditStatus(updatedCredit.totalAmount, updatedCredit.paidAmount)
+
+              return  await this.creditRepository.updateCreditStatus(updatedCredit, status)
+
             })
         } catch (e) {
             console.log(e)
@@ -45,14 +50,7 @@ class PaymentService {
 
     }
 
-     checkPaymentStatus(amount:number,balance:number):CreditStatus{
-        if (amount <= 0){
-          return  "UNPAID"
-        }else if (amount < balance){
-            return  "PARTIAL"
-        }
-        return "PAID"
-    }
+
 
 
 
@@ -62,4 +60,4 @@ class PaymentService {
 
 
 
-export const paymentService=new PaymentService(creditRepository,paymentRepository)
+export const paymentService=new PaymentService(creditRepository,paymentRepository,creditsService)

@@ -3,13 +3,13 @@ import {useTheme} from "@react-navigation/native";
 
 import {CalendarFold} from "lucide-react-native";
 import {formatDate} from "../../../../shared/utils/formatDate";
-import IconButton from "../../../../shared/components/IconButton";
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {CreditStatusBadge} from "./ui/CreditStatusBadge";
 import {formatAmount} from "../../../../shared/utils/formatAmount";
 import {CustomerCreditStatusProps} from "../types";
 import {withObservables} from "@nozbe/watermelondb/react";
+import Button from "../../../../shared/components/Button";
 
 function CustomerCreditStatus({
                                   onPress,
@@ -74,7 +74,7 @@ function CustomerCreditStatus({
                 </View>
                 <View>
 
-                    <IconButton onPress={onPress}
+                    <Button onPress={onPress}
                                 icon={<MaterialCommunityIcons name="package-variant-closed" size={17} color="white"/>}
                                 label={"Items"}/>
                 </View>

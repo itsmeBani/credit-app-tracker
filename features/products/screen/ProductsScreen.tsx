@@ -15,7 +15,6 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";
 import SearchTrigger from "../../../shared/components/SearchBarTrigger";
 import {useNavigation} from "@react-navigation/native";
-import {productRepository} from "../services/product.service";
 
 
 function ProductsContent() {

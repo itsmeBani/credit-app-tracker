@@ -18,7 +18,7 @@ export default function PaymentTypeSelector({
 
 const handleFullPayment = () => {
     onChange("FULL")
-    fullAnimRef.current?.play()
+    fullAnimRef.current?.play(0, 100)
 }
 
 

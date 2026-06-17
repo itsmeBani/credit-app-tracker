@@ -4,8 +4,6 @@ import {useNavigation} from "@react-navigation/native";
 import Title from "../../../shared/components/Title";
 import Search from "../../../shared/components/Search";
 import Customers from "../component/Customers";
-import IconButton from "../../../shared/components/IconButton";
-import AntDesign from "@expo/vector-icons/AntDesign";
 
 import {useDebounce} from "../../../shared/hooks/useDebounce";
 import {SafeAreaContainer} from "../../../shared/components/SafeLayoutContainer";

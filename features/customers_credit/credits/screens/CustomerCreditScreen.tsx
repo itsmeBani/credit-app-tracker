@@ -1,25 +1,26 @@
-import React, {useEffect, useRef} from 'react';
-import {Pressable, Text, View} from "react-native";
+import React, {useRef} from 'react';
+import {View} from "react-native";
 import {SafeAreaContainer} from "../../../../shared/components/SafeLayoutContainer";
 
-import IconButton from "../../../../shared/components/IconButton";
+
 import AntDesign from "@expo/vector-icons/AntDesign";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, {BottomSheetModal} from "@gorhom/bottom-sheet";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import CustomerCredits from "../components/CustomerCredits";
 import {creditsService} from "../../services/credits.service";
 import HeaderNavigation from "../../../../shared/components/HeaderNavigation";
 import {CustomerCreditParams} from "../types";
 import ActionBottomSheet from "../../../../shared/components/ActionSheetModal";
+import Button from "../../../../shared/components/Button";
 
 function CustomerCreditScreen({route}: CustomerCreditParams) {
     const {id, lastname, firstname} = route.params;
 
-    const bottomSheetRef = useRef<BottomSheet>(null);
+    const bottomSheetRef = useRef<BottomSheetModal>(null);
 
     const openBottomSheet = () => {
 
-        bottomSheetRef.current?.expand()
+        bottomSheetRef.current?.present()
     };
 
     const handleCreateCredits = async () => {
@@ -36,7 +37,7 @@ function CustomerCreditScreen({route}: CustomerCreditParams) {
             />
 
             <View className="flex flex-row justify-between pb-5 py-3">
-                <IconButton
+                <Button
                     onPress={openBottomSheet}
                     icon={<AntDesign name="plus" size={15} color="white" />}
                     label={"Credit"}

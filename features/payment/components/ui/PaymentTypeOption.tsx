@@ -31,8 +31,8 @@ export default function PaymentTypeOption({
             className={`${
                 active
                     ? `${colors.bg} ${colors.border} dark:bg-transparent`
-                    : "border-slate-300"
-            } flex-row flex-1  shadow-md gap-2 px-3 py-3 rounded-lg border`}
+                    : "border-slate-200"
+            } flex-row flex-1 bg-white dark:bg-[#191919] shadow-sm gap-2 px-3 py-3 rounded-lg border`}
         >
           <View className="flex-1">
               <Text

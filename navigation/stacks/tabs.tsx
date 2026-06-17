@@ -14,20 +14,21 @@ export const Tabs = createBottomTabNavigator({
     tabBar: (props) => <CustomTabBar {...props} />,
     initialRouteName:"Dashboard",
     screenOptions:{
+        tabBarBadgeStyle: {
+            color: 'black',
+            backgroundColor: 'yellow',
+        },
 
     },
     screens: {
-        Home: {
-            screen: HomeScreen,
+        Dashboard: {
+            screen: DashboardScreen,
             options: {
                 headerShown: false,
                 tabBarIcon: ({ color,focused }) => (
-                    <HomeIcon color={color} filled={focused} size={25}/>
-                ),
-
+                    <DashboardIcon size={25} color={color} filled={focused}/>)
             }
         },
-
         Products: {
             screen: ProductsScreen,
             options: {
@@ -63,12 +64,17 @@ export const Tabs = createBottomTabNavigator({
         },
 
 
-        Dashboard: {
-            screen: DashboardScreen,
+        Updates: {
+
+            screen: HomeScreen,
             options: {
                 headerShown: false,
                 tabBarIcon: ({ color,focused }) => (
-                    <DashboardIcon size={25} color={color} filled={focused}/>)
+
+                    <MaterialCommunityIcons
+                        name={focused ? "bell" : "bell-outline"} size={23}
+                        color={color}/>
+                    )
             }
         },
 

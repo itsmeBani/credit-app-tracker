@@ -8,25 +8,28 @@ import {IMetric} from "../types";
 import productCategory from "../../products/components/ProductCategory";
 import {categoryRepository} from "../../products/services/category.service";
 import {creditRepository} from "../../customers_credit/data/credits.repository";
+import {calculateAllOutstandingBalance} from "../hook/calculateAllOutstandingBalance";
 
-function Metrics({customersCount,productsCount,productCategoriesCount,creditCount}:IMetric) {
+function Metrics({customersCount,productsCount,productCategoriesCount,creditCount,credit}:IMetric) {
+  const balance=calculateAllOutstandingBalance(credit)
+    console.log("rerender")
     return (
         <View className={"gap-2 pt-3"}>
 
-            {/* Balance (soft orange - warning / unpaid) */}
+
             <View className={"flex flex-row gap-2"}>
                 <MetricCard
                     icon={"wallet-bifold-outline"}
                     title="Balance"
                     subtitle="Outstanding payments"
-                    value={2000}
+                    value={balance}
                     format={"currency"}
                     iconColor={"#3B82F6"}
                     iconBg={"#DBEAFE"}
                 />
             </View>
 
-            {/* Products (soft blue - inventory) */}
+
             <View className={"flex flex-row gap-2"}>
                 <MetricCard
                     icon={"package-variant-closed"}
@@ -37,7 +40,7 @@ function Metrics({customersCount,productsCount,productCategoriesCount,creditCoun
                     iconBg={"#EDE9FE"}
                 />
 
-                {/* Customers (soft purple - users) */}
+
 
                 <MetricCard
                     title="Categories"
@@ -49,7 +52,7 @@ function Metrics({customersCount,productsCount,productCategoriesCount,creditCoun
                 />
             </View>
 
-            {/* Credits (soft teal - finance/records) */}
+
             <View className={"flex flex-row gap-2"}>
                 <MetricCard
                     title="Credits"
@@ -76,6 +79,7 @@ const enhance = withObservables([], () => ({
     customersCount: customersRepository.getObservedCustomerCount(),
     productsCount:productRepository.getObservedProductCount(),
     productCategoriesCount:categoryRepository.getObservedProductCategoryCount(),
-    creditCount:creditRepository.getObservedCreditCount()
+    creditCount:creditRepository.getObservedCreditCount(),
+    credit:creditRepository.getActiveCreditDebts()
 }));
 export default enhance(Metrics);

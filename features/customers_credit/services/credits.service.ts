@@ -2,6 +2,7 @@ import {appToast} from "../../../shared/components/toast";
 import {localDatabase} from "../../../local_database";
 import {CreditsRepository} from "../data/credits.repository";
 import ModelProducts from "../../../local_database/model/model.products";
+import {CreditStatus} from "../../../local_database/types";
 export class CreditsService {
     constructor(
         private creditsRepository: CreditsRepository
@@ -72,6 +73,8 @@ export class CreditsService {
             appToast.error("Error", "Failed to add credit item");
         }
     }
+
+
     async updateItemQuantity(id: string, nextQuantity: number) {
         return await localDatabase.write(async () => {
 
@@ -98,19 +101,33 @@ export class CreditsService {
                 0
             );
 
-            await this.creditsRepository.updateCreditTotalAmount(
+         const updatedCredit= await this.creditsRepository.updateCreditTotalAmount(
                 totalAmount,
                 credit
             );
 
+         const status=this.checkCreditStatus(updatedCredit.totalAmount,updatedCredit.paidAmount)
+
+           await this.creditsRepository.updateCreditStatus(updatedCredit,status)
 
             return item;
         });
     }
-    async removeItem() {
+    checkCreditStatus(amount:number,balance:number):CreditStatus{
+
+        if (balance === 0){
+               return "UNPAID"
+
+        } else if (amount > balance){
+            return "PARTIAL"
+        }
+
+            return "PAID"
+
+
+
 
     }
-
 
 }
 

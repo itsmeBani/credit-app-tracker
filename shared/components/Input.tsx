@@ -5,6 +5,7 @@ import {
     TextInputProps,
     TouchableOpacity,
     View,
+    useColorScheme,
 } from "react-native";
 
 type BaseProps = {
@@ -28,8 +29,18 @@ export default function Input({
                                   ...props
                               }: BaseProps) {
     const [isFocused, setIsFocused] = useState(false);
+    const colorScheme = useColorScheme();
 
+    const isDark = colorScheme === "dark";
     const hasError = !!error;
+
+    const borderColor = hasError
+        ? "#fd4949"
+        : isFocused
+            ? "#93C5FD"
+            : isDark
+                ? "#27272a" // zinc-800 for dark mode
+                : "#D1D5DB"; // gray-300 for light mode
 
     return (
         <View>
@@ -41,17 +52,13 @@ export default function Input({
             </Text>
 
             <View
-                className={`flex-row items-start bg-white dark:bg-transparent rounded-lg  ${
-                    multiline ?  "px-2" : " px-3 py-0.5"
+                className={`flex-row items-start bg-white dark:bg-transparent rounded-lg ${
+                    multiline ? "px-2" : "px-3 py-0.5"
                 }`}
                 style={{
                     borderWidth: 1,
-                    borderColor: hasError
-                        ? "#fd4949"
-                        : isFocused
-                            ? "#93C5FD"
-                            : "#D1D5DB",
-                    minHeight: multiline ? 120 : 44, // 👈 textarea height
+                    borderColor,
+                    minHeight: multiline ? 120 : 44,
                 }}
             >
                 <RNTextInput
@@ -61,7 +68,7 @@ export default function Input({
                     placeholderTextColor="#B0B7C3"
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
-                    multiline={multiline}   // 👈 IMPORTANT
+                    multiline={multiline}
                     textAlignVertical={multiline ? "top" : "center"}
                     style={{
                         fontFamily: "PlusJakartaSans",

@@ -32,5 +32,5 @@ export const manageProductSchema = z.object({
         .string()
         .min(1, "Please provide an image"),
     status: z.enum(["AVAILABLE", "UNAVAILABLE"]),
-    categoryId: z.uuid("Invalid category ID"),
+    categoryId: z.uuid("Please select category "),
 });
